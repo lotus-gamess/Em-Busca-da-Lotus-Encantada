@@ -23,6 +23,9 @@ O jogo “Em busca das flores mágicas" é caracterizado com diversos desafios e
 
 6- Se alguma flor estiver apagada significa que nem todas foram coletadas durante o percurso, necessitando que recomece.
 
+## Objetivos:
+O objetivo principal do jogo é acender todas as flores do mapa e salvar a vida da princesa.
+
 
 
 
