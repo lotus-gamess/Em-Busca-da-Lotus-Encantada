@@ -26,6 +26,9 @@ O jogo “Em busca das flores mágicas" é caracterizado com diversos desafios e
 ## Objetivos:
 O objetivo principal do jogo é acender todas as flores do mapa e salvar a vida da princesa.
 
+## Receita
+Marketing e propagandas. 
+
 
 
 
