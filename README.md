@@ -7,7 +7,7 @@ O reino está em apuros! Durante o baile de máscaras anual do castelo alguém e
  Inspirado na flor mágica do filme “Enrolados” e na estética do jogo “Água e Fogo", a ideia é de um jogo de busca pelas flores mágicas. As irmãs terão que trabalhar em equipe para salvar a vida da princesa. 
 
  ## O jogo ideal
-O jogo “Em busca das flores mágicas" é caracterizado com diversos desafios encontrados em cada uma das três fases. Maia e Ivy recebem a missão de superar uma série de obstáculos e chegar ao final do mapa com todas as flores. O jogo tem um objetivo simples, o cenário se desenvolve na floresta e os personagens precisam buscar todas as flores sem que caiam em nenhuma armadilha. Para vencer, eles precisam confiar um no outro. O jogo será lançado com um nível, que foi dividido em três fases, cada fase com um grau de dificuldade diferente. 
+O jogo “Em busca das flores mágicas" é caracterizado com diversos desafios encontrados em cada uma das três fases. Maia e Betty recebem a missão de superar uma série de obstáculos e chegar ao final do mapa com todas as flores. O jogo tem um objetivo simples, o cenário se desenvolve na floresta e os personagens precisam buscar todas as flores sem que caiam em nenhuma armadilha. Para vencer, eles precisam confiar um no outro. O jogo será lançado com um nível, que foi dividido em três fases, cada fase com um grau de dificuldade diferente. 
 
 ## Regras
  
@@ -17,7 +17,7 @@ O jogo “Em busca das flores mágicas" é caracterizado com diversos desafios e
 
 3- A princesa não pode morrer. 
 
-4-  Maia precisa coletar as flores lilás e Ivy precisa coletar as flores amarelas. 
+4-  Maia precisa coletar as flores lilás e Betty precisa coletar as flores amarelas. 
 
 5- No final do mapa todas as flores precisam estar acesas.
 
