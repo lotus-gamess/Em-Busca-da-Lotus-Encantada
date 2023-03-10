@@ -13,7 +13,7 @@ O jogo “Em busca das flores mágicas" é caracterizado com diversos desafios e
  
 1- Os personagens não podem cair na água.
 
-2- Os personagens não podem concluir uma fase sem coletar todas as flores. 
+2- Os personagens podem concluir uma fase sem coletar todas as flores, porém é necessário pegar todas as flores para salvar a princesa no final. 
 
 3- A princesa não pode morrer. 
 
@@ -27,7 +27,7 @@ O jogo “Em busca das flores mágicas" é caracterizado com diversos desafios e
 O objetivo principal do jogo é acender todas as flores do mapa e salvar a vida da princesa.
 
 ## Receita
-Marketing e propagandas. 
+Marketing em redes sociais e propagandas durante o jogo. 
 
 
 
