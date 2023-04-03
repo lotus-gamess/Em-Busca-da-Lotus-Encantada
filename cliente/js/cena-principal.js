@@ -4,56 +4,46 @@ export default class principal extends Phaser.Scene {
   }
 
   preload() {
-    this.load.spritesheet("robo-1", "./assets/robo-1.png", {
-      frameWidth: 64,
-      frameHeight: 64,
+    this.load.spritesheet("player-1", "./assets/player-1/player1.png", {
+      frameWidth: 48,
+      frameHeight: 48,
     });
-
-    this.load.spritesheet("robo-2", "./assets/robo-2.png", {
-      frameWidth: 64,
-      frameHeight: 64,
+     //
+    this.load.spritesheet("player-2", "./assets/player-2/player2.png", {
+      frameWidth: 48,
+      frameHeight: 48,
     });
   }
 
   create() {
-    this.jogador_1 = this.physics.add
-      .sprite(200, 225, "robo-1")
-      .setInteractive()
-      .on("pointerdown", () => {
-        this.jogador_1.destroy();
-        this.jogador_2.destroy();
-        this.game.scene.start("fim-do-jogo");
-      });
+    this.player_1 = this.physics.add.sprite(200, 225, "player-1");
+    //
     this.anims.create({
-      key: "jogador-1-direita",
-      frames: this.anims.generateFrameNumbers("robo-1", {
-        start: 0,
-        end: 15,
+      key: "player-1-direita",
+      frames: this.anims.generateFrameNumbers("player-1", {
+        start: 6,
+        end: 8,
       }),
-      frameRate: 30,
+      frameRate: 10,
       repeat: -1,
     });
-    this.jogador_1.anims.play("jogador-1-direita", true);
-
-    this.jogador_2 = this.physics.add
-      .sprite(600, 225, "robo-2")
-      .setInteractive()
-      .on("pointerdown", () => {
-        this.jogador_1.destroy();
-        this.jogador_2.destroy();
-        this.game.scene.start("final-feliz");
-      });
+    //
+    this.player_1.anims.play("player-1-direita", true);
+    //
+    this.player_2 = this.physics.add.sprite(600, 225, "player-2");
+    //
     this.anims.create({
-      key: "jogador-2-direita",
-      frames: this.anims.generateFrameNumbers("robo-2", {
-        start: 32,
-        end: 47,
+      key: "player-2-esquerda",
+      frames: this.anims.generateFrameNumbers("player-2", {
+        start: 3,
+        end: 5,
       }),
-      frameRate: 30,
+      frameRate: 10,
       repeat: -1,
     });
-    this.jogador_2.anims.play("jogador-2-direita", true);
+    //
+    this.player_2.anims.play("player-2-esquerda", true);
   }
-
+  
   update() {}
 }
