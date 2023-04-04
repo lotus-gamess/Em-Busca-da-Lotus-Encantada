@@ -4,17 +4,41 @@ export default class principal extends Phaser.Scene {
   }
 
   preload() {
+    // Mapa
+    // Tilemap
+    this.load.tilemapTiledJSON(
+      "mapa-inicial",
+      "./assets/mapa/mapa.json"
+    );
+    // Tilesets
+    this.load.image("tijolos", "./assets/tijolos/tijolos.png");
+    //
     this.load.spritesheet("player-1", "./assets/player-1/player1.png", {
       frameWidth: 48,
       frameHeight: 48,
     });
-     //
+    //
     this.load.spritesheet("player-2", "./assets/player-2/player2.png", {
       frameWidth: 48,
       frameHeight: 48,
     });
   }
-
+  create() {
+    // Mapa
+    // Tilemap
+    this.mapa_principal_terreo = this.make.tilemap({
+      key: "mapa-inicial",
+    });
+    // Tilesets
+    this.tileset_principal_terreo_parede =
+      this.mapa_inicial.addTilesetImage("tijolos", "tijolos");
+    // Layer 0: chão
+    this.chao = this.mapa_principal_terreo.createLayer(
+      "chao",
+      this.tileset_principal_terreo_chao,
+      0,
+      0
+    );
   create() {
     this.player_1 = this.physics.add.sprite(200, 225, "player-1");
     //
