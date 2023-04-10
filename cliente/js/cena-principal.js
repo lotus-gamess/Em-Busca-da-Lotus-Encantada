@@ -6,10 +6,7 @@ export default class principal extends Phaser.Scene {
   preload() {
     // Mapa
     // Tilemap
-    this.load.tilemapTiledJSON(
-      "mapa-inicial",
-      "./assets/mapa/mapa.json"
-    );
+    this.load.tilemapTiledJSON("mapa-inicial", "./assets/mapa/mapa.json");
     // Tilesets
     this.load.image("tijolos", "./assets/tijolos/tijolos.png");
     //
@@ -22,7 +19,26 @@ export default class principal extends Phaser.Scene {
       frameWidth: 48,
       frameHeight: 48,
     });
+
+    /* botões */
+    this.load.spritesheet("cima", "./assets/botao/cima.png", {
+      frameWidth: 64,
+      frameWidth: 64,
+    });
+    this.load.spritesheet("baixo", "./assets/botao/baixo.png", {
+      frameWidth: 64,
+      frameWidth: 64,
+    });
+    this.load.spritesheet("esquerda", "./assets/botao/esquerda.png", {
+      frameWidth: 64,
+      frameWidth: 64,
+    });
+    this.load.spritesheet("direita", "./assets/botao/direita.png", {
+      frameWidth: 64,
+      frameWidth: 64,
+    });
   }
+
   create() {
     // Mapa
     // Tilemap
@@ -30,8 +46,10 @@ export default class principal extends Phaser.Scene {
       key: "mapa-inicial",
     });
     // Tilesets
-    this.tileset_principal_terreo_parede =
-      this.mapa_inicial.addTilesetImage("tijolos", "tijolos");
+    this.tileset_principal_terreo_parede = this.mapa_inicial.addTilesetImage(
+      "tijolos",
+      "tijolos"
+    );
     // Layer 0: chão
     this.chao = this.mapa_principal_terreo.createLayer(
       "chao",
@@ -39,9 +57,29 @@ export default class principal extends Phaser.Scene {
       0,
       0
     );
-  create() {
+
     this.player_1 = this.physics.add.sprite(200, 225, "player-1");
     //
+    this.anims.create({
+      key: "player-1-frente",
+      frames: this.anims.generateFrameNumbers("player-1", {
+        start: 0,
+        end: 2,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "player-1-esquerda",
+      frames: this.anims.generateFrameNumbers("player-1", {
+        start: 3,
+        end: 5,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
     this.anims.create({
       key: "player-1-direita",
       frames: this.anims.generateFrameNumbers("player-1", {
@@ -51,23 +89,34 @@ export default class principal extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-    //
-    this.player_1.anims.play("player-1-direita", true);
-    //
-    this.player_2 = this.physics.add.sprite(600, 225, "player-2");
-    //
+
     this.anims.create({
-      key: "player-2-esquerda",
-      frames: this.anims.generateFrameNumbers("player-2", {
-        start: 3,
-        end: 5,
+      key: "player-1-costas",
+      frames: this.anims.generateFrameNumbers("player-1", {
+        start: 9,
+        end: 11,
       }),
       frameRate: 10,
       repeat: -1,
     });
     //
-    this.player_2.anims.play("player-2-esquerda", true);
-  }
+    this.player_2 = this.add.sprite(600, 225, "player-2");
+    //
   
-  update() {}
+    /* botões */
+    this.cima = this.add
+      .sprite(100, 350, "cima", 0)
+      .setInteractive()
+      .on("pointerdown", () => {
+        this.cima.setFrame(1)
+        this.player_1.setVelocityY(-50);
+        this.player_1.anims.play("player-1-cima")
+      })
+      .on("pointerup", () => {
+        this.cima.setFrame(0);
+        this.player_1.setVelocityY(0);
+      })
+    
+    
+  }
 }

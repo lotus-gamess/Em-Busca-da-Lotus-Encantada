@@ -4,12 +4,12 @@ export default class abertura extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("teste.webp", "./assets/teste/teste.webp");
+    this.load.image("abertura", "./assets/abertura/abertura.png");
   }
 
   create() {
     this.imagem = this.add
-      .image(400, 225, "teste.webp")
+      .image(400, 225, "abertura")
       .setInteractive()
       .on("pointerdown", () => {
         this.imagem.destroy();
@@ -17,7 +17,7 @@ export default class abertura extends Phaser.Scene {
         this.game.scene.start("principal");
       });
 
-    this.texto = this.add.text(490, 50, "Clique no prédio para entrar...", {
+    this.texto = this.add.text(490, 50, {
       fill: "#000000",
     });
   }
