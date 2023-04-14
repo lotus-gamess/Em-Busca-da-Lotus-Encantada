@@ -80,7 +80,7 @@ export default class principal extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: "player-1-paradoesquerda",
+      key: "player-1-paradofrente",
       frames: this.anims.generateFrameNumbers("player-1-parado", {
         start: 2,
         end: 3,
@@ -90,10 +90,20 @@ export default class principal extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: "player-1-paradodireita",
+      key: "player-1-paradoesquerda",
       frames: this.anims.generateFrameNumbers("player-1-parado", {
         start: 4,
         end: 5,
+      }),
+      frameRate: 5,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "player-1-paradodireita",
+      frames: this.anims.generateFrameNumbers("player-1-parado", {
+        start: 6,
+        end: 7,
       }),
       frameRate: 5,
       repeat: -1,
