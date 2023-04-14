@@ -6,14 +6,19 @@ export default class principal extends Phaser.Scene {
   preload() {
     // Mapa
     // Tilemap
-    this.load.tilemapTiledJSON("mapa-inicial", "./assets/mapa/mapa.json");
+    //this.load.tilemapTiledJSON("mapa-inicial", "./assets/mapa/mapa.json");
+
     // Tilesets
-    this.load.image("tijolos", "./assets/tijolos/tijolos.png");
+    //this.load.image("tijolos", "./assets/tijolos/tijolos.png");
     //
     this.load.spritesheet("player-1", "./assets/player-1/player1.png", {
       frameWidth: 48,
       frameHeight: 48,
     });
+    this.load.spritesheet("player-1-parado", "./assets/player-1/player1-parado.png", {
+          frameWidth: 48,
+          frameHeight: 48,
+        });
     //
     this.load.spritesheet("player-2", "./assets/player-2/player2.png", {
       frameWidth: 48,
@@ -42,10 +47,13 @@ export default class principal extends Phaser.Scene {
   create() {
     // Mapa
     // Tilemap
+    /*
     this.mapa_principal_terreo = this.make.tilemap({
       key: "mapa-inicial",
     });
+    */
     // Tilesets
+    /*
     this.tileset_principal_terreo_parede = this.mapa_inicial.addTilesetImage(
       "tijolos",
       "tijolos"
@@ -57,9 +65,40 @@ export default class principal extends Phaser.Scene {
       0,
       0
     );
-
+*/
+    
     this.player_1 = this.physics.add.sprite(200, 225, "player-1");
     //
+    this.anims.create({
+      key: "player-1-paradocostas",
+      frames: this.anims.generateFrameNumbers("player-1-parado", {
+        start: 0,
+        end: 1
+      }),
+      frameRate: 5,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "player-1-paradoesquerda",
+      frames: this.anims.generateFrameNumbers("player-1-parado", {
+        start: 2,
+        end: 3,
+      }),
+      frameRate: 5,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "player-1-paradodireita",
+      frames: this.anims.generateFrameNumbers("player-1-parado", {
+        start: 4,
+        end: 5,
+      }),
+      frameRate: 5,
+      repeat: -1,
+    });
+
     this.anims.create({
       key: "player-1-frente",
       frames: this.anims.generateFrameNumbers("player-1", {
@@ -102,21 +141,62 @@ export default class principal extends Phaser.Scene {
     //
     this.player_2 = this.add.sprite(600, 225, "player-2");
     //
-  
+
     /* botões */
     this.cima = this.add
-      .sprite(100, 350, "cima", 0)
+      .sprite(120, 330, "cima", 0)
       .setInteractive()
-      .on("pointerdown", () => {
-        this.cima.setFrame(1)
-        this.player_1.setVelocityY(-50);
-        this.player_1.anims.play("player-1-cima")
+      .on("pointerover", () => {
+        this.cima.setFrame(1);
+        this.player_1.setVelocityY(-100);
+        this.player_1.anims.play("player-1-costas");
       })
-      .on("pointerup", () => {
+      .on("pointerout", () => {
         this.cima.setFrame(0);
         this.player_1.setVelocityY(0);
+        this.player_1.anims.play("player-1-paradocostas");
+      });
+
+    this.baixo = this.add
+      .sprite(120, 400, "baixo", 0)
+      .setInteractive()
+      .on("pointerover", () => {
+        this.baixo.setFrame(1);
+        this.player_1.setVelocityY(100);
+        this.player_1.anims.play("player-1-frente");
       })
-    
-    
+      .on("pointerout", () => {
+        this.baixo.setFrame(0);
+        this.player_1.setVelocityY(0);
+        this.player_1.anims.play("player1-paradofrente");
+      });
+
+    this.esquerda = this.add
+      .sprite(50, 400, "esquerda", 0)
+      .setInteractive()
+      .on("pointerover", () => {
+        this.esquerda.setFrame(1);
+        this.player_1.setVelocityX(-100);
+        this.player_1.anims.play("player-1-esquerda");
+      })
+      .on("pointerout", () => {
+        this.esquerda.setFrame(0);
+        this.player_1.setVelocityX(0);
+        this.player_1.anims.play("player-1-paradoesquerda");
+      });
+
+    this.direita = this.add
+      .sprite(190, 400, "direita", 0)
+      .setInteractive()
+      .on("pointerover", () => {
+        this.direita.setFrame(1);
+        this.player_1.setVelocityX(100);
+        this.player_1.anims.play("player-1-direita");
+      })
+      .on("pointerout", () => {
+        this.direita.setFrame(0);
+        this.player_1.setVelocityX(0);
+        this.player_1.anims.play("player-1-paradodireita");
+      });
   }
 }
