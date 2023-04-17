@@ -13,13 +13,9 @@ export default class abertura extends Phaser.Scene {
       .setInteractive()
       .on("pointerdown", () => {
         this.imagem.destroy();
-        this.texto.destroy();
         this.game.scene.start("principal");
       });
-
-    this.texto = this.add.text(490, 50, {
-      fill: "#000000",
-    });
+    
   }
 
   upload() {}

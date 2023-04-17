@@ -75,7 +75,7 @@ export default class principal extends Phaser.Scene {
         start: 0,
         end: 1
       }),
-      frameRate: 5,
+      frameRate: 4,
       repeat: -1,
     });
 
@@ -85,7 +85,7 @@ export default class principal extends Phaser.Scene {
         start: 2,
         end: 3,
       }),
-      frameRate: 5,
+      frameRate: 4,
       repeat: -1,
     });
 
@@ -95,7 +95,7 @@ export default class principal extends Phaser.Scene {
         start: 4,
         end: 5,
       }),
-      frameRate: 5,
+      frameRate: 4,
       repeat: -1,
     });
 
@@ -105,7 +105,7 @@ export default class principal extends Phaser.Scene {
         start: 6,
         end: 7,
       }),
-      frameRate: 5,
+      frameRate: 4,
       repeat: -1,
     });
 
@@ -173,7 +173,7 @@ export default class principal extends Phaser.Scene {
       .on("pointerover", () => {
         this.baixo.setFrame(1);
         this.player_1.setVelocityY(100);
-        this.player_1.anims.play("player-1-frente");
+        this.player_1.anims.play("player-1-paradofrente");
       })
       .on("pointerout", () => {
         this.baixo.setFrame(0);
@@ -208,5 +208,14 @@ export default class principal extends Phaser.Scene {
         this.player_1.setVelocityX(0);
         this.player_1.anims.play("player-1-paradodireita");
       });
+    
+      /* Colisão com os limites da cena */
+      this.player_1.setCollideWorldBounds(true);
+
+      /* Cena maior que a tela (800x450) */
+      this.cameras.main.setBounds(0, 0, 2496, 640); 
+      this.physics.world.setBounds(0, 0, 2496, 640);
+      this.cameras.main.startFollow(this.player_1);
   }
-}
+  }
+
