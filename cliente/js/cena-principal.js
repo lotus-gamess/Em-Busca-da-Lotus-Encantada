@@ -6,11 +6,16 @@ export default class principal extends Phaser.Scene {
   preload() {
     // Mapa
     // Tilemap
-    //this.load.tilemapTiledJSON("mapa-inicial", "./assets/mapa/mapa.json");
+    //this.load.tilemapTiledJSON("mapa1", "./assets/mapa-1/mapa1.json");
 
     // Tilesets
-    //this.load.image("tijolos", "./assets/tijolos/tijolos.png");
+
+    // Mapa 1
+    //this.load.image("ceu", "./assets/mapa-1/ceu.png");
+    //this.load.image("tijolos", "./assets/mapa1/tijolos.png");
     //
+
+    // Corpo do player 1
     this.load.spritesheet("player-1", "./assets/player-1/player1.png", {
       frameWidth: 48,
       frameHeight: 48,
@@ -18,14 +23,16 @@ export default class principal extends Phaser.Scene {
     this.load.spritesheet("player-1-parado", "./assets/player-1/player1-parado.png", {
           frameWidth: 48,
           frameHeight: 48,
-        });
-    //
+    });
+    
+    // Corpo do player 2
     this.load.spritesheet("player-2", "./assets/player-2/player2.png", {
       frameWidth: 48,
       frameHeight: 48,
     });
 
-    /* botões */
+    // Botões 
+    
     this.load.spritesheet("cima", "./assets/botao/cima.png", {
       frameWidth: 64,
       frameWidth: 64,
@@ -154,11 +161,11 @@ export default class principal extends Phaser.Scene {
 
     /* botões */
     this.cima = this.add
-      .sprite(120, 330, "cima", 0)
+      .sprite(700, 360, "cima", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.cima.setFrame(1);
-        this.player_1.setVelocityY(-100);
+        this.player_1.setVelocityY(-300);
         this.player_1.anims.play("player-1-costas");
       })
       .on("pointerout", () => {
@@ -167,26 +174,12 @@ export default class principal extends Phaser.Scene {
         this.player_1.anims.play("player-1-paradocostas");
       });
 
-    this.baixo = this.add
-      .sprite(120, 400, "baixo", 0)
-      .setInteractive()
-      .on("pointerover", () => {
-        this.baixo.setFrame(1);
-        this.player_1.setVelocityY(100);
-        this.player_1.anims.play("player-1-paradofrente");
-      })
-      .on("pointerout", () => {
-        this.baixo.setFrame(0);
-        this.player_1.setVelocityY(0);
-        this.player_1.anims.play("player1-paradofrente");
-      });
-
     this.esquerda = this.add
-      .sprite(50, 400, "esquerda", 0)
+      .sprite(665, 400, "esquerda", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.esquerda.setFrame(1);
-        this.player_1.setVelocityX(-100);
+        this.player_1.setVelocityX(-200);
         this.player_1.anims.play("player-1-esquerda");
       })
       .on("pointerout", () => {
@@ -196,11 +189,11 @@ export default class principal extends Phaser.Scene {
       });
 
     this.direita = this.add
-      .sprite(190, 400, "direita", 0)
+      .sprite(735, 400, "direita", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.direita.setFrame(1);
-        this.player_1.setVelocityX(100);
+        this.player_1.setVelocityX(200);
         this.player_1.anims.play("player-1-direita");
       })
       .on("pointerout", () => {
@@ -208,6 +201,20 @@ export default class principal extends Phaser.Scene {
         this.player_1.setVelocityX(0);
         this.player_1.anims.play("player-1-paradodireita");
       });
+    
+    this.tela_cheia = this.add
+      .sprite(750, 50, "tela-cheia", 0)
+      .setInteractive()
+      .on("pointerdown", () => {
+        if (this.scale.isFullscreen) {
+          this.tela_cheia.setFrame(0);
+          this.scale.stopFullscreen();
+        } else {
+          this.tela_cheia.setFrame(1);
+          this.scale.startFullscreen();
+        }
+      })
+      .setScrollFactor(0);
     
       /* Colisão com os limites da cena */
       this.player_1.setCollideWorldBounds(true);
