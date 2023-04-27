@@ -6,14 +6,12 @@ export default class principal extends Phaser.Scene {
   preload() {
     // Mapa
     // Tilemap
-    //this.load.tilemapTiledJSON("mapa1", "./assets/mapa-1/mapa1.json");
+    this.load.tilemapTiledJSON("mapa1", "./assets/mapa1/mapa1.json");
 
     // Tilesets
 
     // Mapa 1
-    //this.load.image("ceu", "./assets/mapa-1/ceu.png");
-    //this.load.image("tijolos", "./assets/mapa1/tijolos.png");
-    //
+    this.load.image("plataforma5", "./assets/mapa1/plataforma5.png");
 
     // Corpo do player 1
     this.load.spritesheet("player-1", "./assets/player-1/player1.png", {
@@ -52,30 +50,32 @@ export default class principal extends Phaser.Scene {
   }
 
   create() {
-    // Mapa
+
+    // Mapa1
+
     // Tilemap
-    /*
-    this.mapa_principal_terreo = this.make.tilemap({
-      key: "mapa-inicial",
+    
+    this.mapa1 = this.make.tilemap({
+      key: "mapa1",
     });
-    */
-    // Tilesets
-    /*
-    this.tileset_principal_terreo_parede = this.mapa_inicial.addTilesetImage(
-      "tijolos",
-      "tijolos"
+    
+    this.tileset_plataforma5 = this.mapa1.addTilesetImage(
+      "platformertiles",
+      "plataforma5"
     );
-    // Layer 0: chão
-    this.chao = this.mapa_principal_terreo.createLayer(
-      "chao",
-      this.tileset_principal_terreo_chao,
+
+    // Layer 0: fundo
+    this.fundo = this.mapa1.createLayer(
+      "platformertiles",
+      this.tileset_plataforma5,
       0,
       0
     );
-*/
     
+    // Player 1 - animações
+
     this.player_1 = this.physics.add.sprite(200, 225, "player-1");
-    //
+    
     this.anims.create({
       key: "player-1-paradocostas",
       frames: this.anims.generateFrameNumbers("player-1-parado", {
@@ -159,7 +159,8 @@ export default class principal extends Phaser.Scene {
     this.player_2 = this.add.sprite(600, 225, "player-2");
     //
 
-    /* botões */
+    // Botões //
+
     this.cima = this.add
       .sprite(700, 360, "cima", 0)
       .setInteractive()
@@ -172,7 +173,8 @@ export default class principal extends Phaser.Scene {
         this.cima.setFrame(0);
         this.player_1.setVelocityY(0);
         this.player_1.anims.play("player-1-paradocostas");
-      });
+      })
+      .setScrollFactor(0);
 
     this.esquerda = this.add
       .sprite(665, 400, "esquerda", 0)
@@ -186,7 +188,8 @@ export default class principal extends Phaser.Scene {
         this.esquerda.setFrame(0);
         this.player_1.setVelocityX(0);
         this.player_1.anims.play("player-1-paradoesquerda");
-      });
+      })
+      .setScrollFactor(0);
 
     this.direita = this.add
       .sprite(735, 400, "direita", 0)
@@ -200,7 +203,8 @@ export default class principal extends Phaser.Scene {
         this.direita.setFrame(0);
         this.player_1.setVelocityX(0);
         this.player_1.anims.play("player-1-paradodireita");
-      });
+      })
+      .setScrollFactor(0);
     
     this.tela_cheia = this.add
       .sprite(750, 50, "tela-cheia", 0)
