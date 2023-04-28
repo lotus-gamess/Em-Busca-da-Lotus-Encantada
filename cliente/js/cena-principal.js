@@ -66,7 +66,6 @@ export default class principal extends Phaser.Scene {
     // Sons
 
     this.load.audio("fairy-tale", "./assets/musica/fairy-tale.mp3");
-
   }
 
   create() {
@@ -259,11 +258,35 @@ export default class principal extends Phaser.Scene {
       this
     );
 
-    // Animação objetos
-
-    this.flor_laranja = this.physics.add.sprite(50, 585, "flor-laranja");
-    this.flor_laranja.body.setAllowGravity(false);
-    this.flor_laranja.disableBody(false, true);
+    // Animação de lista de objetos
+    this.flores_laranja = [
+      {
+        x: 200,
+        y: 300,
+        objeto: undefined,
+      },
+      {
+        x: 300,
+        y: 330,
+        objeto: undefined,
+      },
+      {
+        x: 400,
+        y: 330,
+        objeto: undefined,
+      },
+    ];
+    this.flores_laranja.forEach((item) => {
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
+      item.objeto.body.setAllowGravity(false);
+      this.physics.add.collider(
+        this.player_1,
+        item.objeto,
+        this.pegar_flor_laranja,
+        null,
+        this
+      );
+    });
 
     /* Colisão com os limites da cena */
     this.player_1.setCollideWorldBounds(true);
@@ -278,7 +301,8 @@ export default class principal extends Phaser.Scene {
 
   colidir_mapa() {}
 
-  pegar_flor_laranja() {
-    this.flor_laranja.disableBody(true, true);
+  pegar_flor_laranja(jogador, flor) {
+    flor.disableBody(true, true);
+    console.log(this.flores_laranja)
   }
 }
