@@ -259,6 +259,36 @@ export default class principal extends Phaser.Scene {
       this
     );
 
+    // Animação de lista de objetos
+    this.flores_laranja = [
+      {
+        x: 200,
+        y: 300,
+        objeto: undefined,
+      },
+      {
+        x: 300,
+        y: 330,
+        objeto: undefined,
+      },
+      {
+        x: 400,
+        y: 330,
+        objeto: undefined,
+      },
+    ];
+    this.flores_laranja.forEach((item) => {
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
+      item.objeto.body.setAllowGravity(false);
+      this.physics.add.collider(
+        this.player_1,
+        item.objeto,
+        this.pegar_flor_laranja,
+        null,
+        this
+      );
+    });
+
     // Animação objetos
 
     this.flor_laranja = this.physics.add.sprite(50, 585, "flor-laranja");
@@ -272,13 +302,5 @@ export default class principal extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 2496, 640);
     this.physics.world.setBounds(0, 0, 2496, 640);
     this.cameras.main.startFollow(this.player_1);
-  }
-
-  update() {}
-
-  colidir_mapa() {}
-
-  pegar_flor_laranja() {
-    this.flor_laranja.disableBody(true, true);
   }
 }
