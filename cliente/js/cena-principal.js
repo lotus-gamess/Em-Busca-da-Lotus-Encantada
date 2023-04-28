@@ -66,7 +66,6 @@ export default class principal extends Phaser.Scene {
     // Sons
 
     this.load.audio("fairy-tale", "./assets/musica/fairy-tale.mp3");
-
   }
 
   create() {
@@ -289,12 +288,6 @@ export default class principal extends Phaser.Scene {
       );
     });
 
-    // Animação objetos
-
-    this.flor_laranja = this.physics.add.sprite(50, 585, "flor-laranja");
-    this.flor_laranja.body.setAllowGravity(false);
-    this.flor_laranja.disableBody(false, true);
-
     /* Colisão com os limites da cena */
     this.player_1.setCollideWorldBounds(true);
 
@@ -302,5 +295,13 @@ export default class principal extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 2496, 640);
     this.physics.world.setBounds(0, 0, 2496, 640);
     this.cameras.main.startFollow(this.player_1);
+  }
+
+  update() {}
+
+  colidir_mapa() {}
+
+  pegar_flor_laranja() {
+    this.flor_laranja.disableBody(true, true);
   }
 }
