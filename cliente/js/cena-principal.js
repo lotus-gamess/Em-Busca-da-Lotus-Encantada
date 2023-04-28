@@ -33,6 +33,12 @@ export default class principal extends Phaser.Scene {
       frameHeight: 48,
     });
 
+    // Objetos
+
+    this.load.image("flor-lilas", "./assets/objeto/flor-lilas.png");
+
+    this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
+
     // Botões
 
     this.load.spritesheet("cima", "./assets/botao/cima.png", {
@@ -56,9 +62,18 @@ export default class principal extends Phaser.Scene {
       frameWidth: 64,
       frameWidth: 64,
     });
+
+    // Sons
+
+    this.load.audio("fairy-tale", "./assets/musica/fairy-tale.mp3");
+
   }
 
   create() {
+    // Trilha sonora
+    this.trilha = this.sound.add("fairy-tale");
+    this.trilha.play();
+
     // Mapa1
 
     // Tilemap
@@ -244,6 +259,12 @@ export default class principal extends Phaser.Scene {
       this
     );
 
+    // Animação objetos
+
+    this.flor_laranja = this.physics.add.sprite(50, 585, "flor-laranja");
+    this.flor_laranja.body.setAllowGravity(false);
+    this.flor_laranja.disableBody(false, true);
+
     /* Colisão com os limites da cena */
     this.player_1.setCollideWorldBounds(true);
 
@@ -256,4 +277,8 @@ export default class principal extends Phaser.Scene {
   update() {}
 
   colidir_mapa() {}
+
+  pegar_flor_laranja() {
+    this.flor_laranja.disableBody(true, true);
+  }
 }
