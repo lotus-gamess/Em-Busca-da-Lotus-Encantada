@@ -18,19 +18,23 @@ export default class principal extends Phaser.Scene {
       frameWidth: 48,
       frameHeight: 48,
     });
-    this.load.spritesheet("player-1-parado", "./assets/player-1/player1-parado.png", {
-          frameWidth: 48,
-          frameHeight: 48,
-    });
-    
+    this.load.spritesheet(
+      "player-1-parado",
+      "./assets/player-1/player1-parado.png",
+      {
+        frameWidth: 48,
+        frameHeight: 48,
+      }
+    );
+
     // Corpo do player 2
     this.load.spritesheet("player-2", "./assets/player-2/player2.png", {
       frameWidth: 48,
       frameHeight: 48,
     });
 
-    // Botões 
-    
+    // Botões
+
     this.load.spritesheet("cima", "./assets/botao/cima.png", {
       frameWidth: 64,
       frameWidth: 64,
@@ -47,40 +51,48 @@ export default class principal extends Phaser.Scene {
       frameWidth: 64,
       frameWidth: 64,
     });
+
+    this.load.spritesheet("tela-cheia", "./assets/botao/tela-cheia.png", {
+      frameWidth: 64,
+      frameWidth: 64,
+    });
   }
 
   create() {
-
     // Mapa1
 
     // Tilemap
-    
+
     this.mapa1 = this.make.tilemap({
       key: "mapa1",
     });
-    
-    this.tileset_plataforma5 = this.mapa1.addTilesetImage(
-      "platformertiles",
-      "plataforma5"
-    );
+
+    this.tileset_plataforma5 = this.mapa1.addTilesetImage("plataforma5");
 
     // Layer 0: fundo
     this.fundo = this.mapa1.createLayer(
-      "platformertiles",
+      "fundo",
       this.tileset_plataforma5,
       0,
       0
     );
-    
+
+    this.plataforma = this.mapa1.createLayer(
+      "plataforma",
+      this.tileset_plataforma5,
+      0,
+      0
+    );
+
     // Player 1 - animações
 
     this.player_1 = this.physics.add.sprite(200, 225, "player-1");
-    
+
     this.anims.create({
       key: "player-1-paradocostas",
       frames: this.anims.generateFrameNumbers("player-1-parado", {
         start: 0,
-        end: 1
+        end: 1,
       }),
       frameRate: 4,
       repeat: -1,
@@ -205,7 +217,7 @@ export default class principal extends Phaser.Scene {
         this.player_1.anims.play("player-1-paradodireita");
       })
       .setScrollFactor(0);
-    
+
     this.tela_cheia = this.add
       .sprite(750, 50, "tela-cheia", 0)
       .setInteractive()
@@ -219,14 +231,29 @@ export default class principal extends Phaser.Scene {
         }
       })
       .setScrollFactor(0);
-    
-      /* Colisão com os limites da cena */
-      this.player_1.setCollideWorldBounds(true);
 
-      /* Cena maior que a tela (800x450) */
-      this.cameras.main.setBounds(0, 0, 2496, 640); 
-      this.physics.world.setBounds(0, 0, 2496, 640);
-      this.cameras.main.startFollow(this.player_1);
-  }
+    /* Colisões por tile */
+    this.plataforma.setCollisionByProperty({ collides: true });
+
+    /* Colisão entre personagem 1 e mapa (por layer) */
+    this.physics.add.collider(
+      this.player_1,
+      this.plataforma,
+      this.colidir_mapa,
+      null,
+      this
+    );
+
+    /* Colisão com os limites da cena */
+    this.player_1.setCollideWorldBounds(true);
+
+    /* Cena maior que a tela (800x450) */
+    this.cameras.main.setBounds(0, 0, 2496, 640);
+    this.physics.world.setBounds(0, 0, 2496, 640);
+    this.cameras.main.startFollow(this.player_1);
   }
 
+  update() {}
+
+  colidir_mapa() {}
+}
