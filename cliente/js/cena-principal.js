@@ -100,7 +100,7 @@ export default class principal extends Phaser.Scene {
 
     // Player 1 - animações
 
-    this.player_1 = this.physics.add.sprite(200, 225, "player-1");
+    this.player_1 = this.physics.add.sprite(40, 500, "player-1");
 
     this.anims.create({
       key: "player-1-paradocostas",
@@ -261,18 +261,48 @@ export default class principal extends Phaser.Scene {
     // Animação de lista de objetos
     this.flores_laranja = [
       {
-        x: 200,
-        y: 300,
+        x: 450,
+        y: 550,
         objeto: undefined,
       },
       {
-        x: 300,
+        x: 250,
+        y: 360,
+        objeto: undefined,
+      },
+      {
+        x: 90,
+        y: 180,
+        objeto: undefined,
+      },
+      {
+        x: 850,
         y: 330,
         objeto: undefined,
       },
       {
-        x: 400,
-        y: 330,
+        x: 1060,
+        y: 480,
+        objeto: undefined,
+      },
+      {
+        x: 1550,
+        y: 550,
+        objeto: undefined,
+      },
+      {
+        x: 850,
+        y: 110,
+        objeto: undefined,
+      },
+      {
+        x: 2150,
+        y: 200,
+        objeto: undefined,
+      },
+      {
+        x: 2460,
+        y: 350,
         objeto: undefined,
       },
     ];
@@ -296,12 +326,5 @@ export default class principal extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 2496, 640);
     this.cameras.main.startFollow(this.player_1);
   }
-
-  update() {}
-
-  colidir_mapa() {}
-
-  pegar_flor_laranja() {
-    this.flor_laranja.disableBody(true, true);
-  }
 }
+  
