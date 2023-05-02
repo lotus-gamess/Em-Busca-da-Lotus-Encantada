@@ -195,67 +195,6 @@ export default class principal extends Phaser.Scene {
     this.player_2 = this.add.sprite(600, 225, "player-2");
     //
 
-    // Botões //
-
-    this.cima = this.add
-      .sprite(700, 360, "cima", 0)
-      .setInteractive()
-      .on("pointerover", () => {
-        this.cima.setFrame(1);
-        this.player_1.setVelocityY(-300);
-        this.player_1.anims.play("player-1-costas");
-      })
-      .on("pointerout", () => {
-        this.cima.setFrame(0);
-        this.player_1.setVelocityY(0);
-        this.player_1.anims.play("player-1-paradocostas");
-      })
-      .setScrollFactor(0);
-
-    this.esquerda = this.add
-      .sprite(665, 400, "esquerda", 0)
-      .setInteractive()
-      .on("pointerover", () => {
-        this.esquerda.setFrame(1);
-        this.player_1.setVelocityX(-200);
-        this.player_1.anims.play("player-1-esquerda");
-      })
-      .on("pointerout", () => {
-        this.esquerda.setFrame(0);
-        this.player_1.setVelocityX(0);
-        this.player_1.anims.play("player-1-paradoesquerda");
-      })
-      .setScrollFactor(0);
-
-    this.direita = this.add
-      .sprite(735, 400, "direita", 0)
-      .setInteractive()
-      .on("pointerover", () => {
-        this.direita.setFrame(1);
-        this.player_1.setVelocityX(200);
-        this.player_1.anims.play("player-1-direita");
-      })
-      .on("pointerout", () => {
-        this.direita.setFrame(0);
-        this.player_1.setVelocityX(0);
-        this.player_1.anims.play("player-1-paradodireita");
-      })
-      .setScrollFactor(0);
-
-    this.tela_cheia = this.add
-      .sprite(750, 50, "tela-cheia", 0)
-      .setInteractive()
-      .on("pointerdown", () => {
-        if (this.scale.isFullscreen) {
-          this.tela_cheia.setFrame(0);
-          this.scale.stopFullscreen();
-        } else {
-          this.tela_cheia.setFrame(1);
-          this.scale.startFullscreen();
-        }
-      })
-      .setScrollFactor(0);
-
     /* Colisões por tile */
     this.plataforma.setCollisionByProperty({ collides: true });
 
@@ -380,6 +319,67 @@ export default class principal extends Phaser.Scene {
         this
       );
     });
+
+    // Botões //
+
+    this.cima = this.add
+      .sprite(700, 360, "cima", 0)
+      .setInteractive()
+      .on("pointerover", () => {
+        this.cima.setFrame(1);
+        this.player_1.setVelocityY(-300);
+        this.player_1.anims.play("player-1-costas");
+      })
+      .on("pointerout", () => {
+        this.cima.setFrame(0);
+        this.player_1.setVelocityY(0);
+        this.player_1.anims.play("player-1-paradocostas");
+      })
+      .setScrollFactor(0);
+
+    this.esquerda = this.add
+      .sprite(665, 400, "esquerda", 0)
+      .setInteractive()
+      .on("pointerover", () => {
+        this.esquerda.setFrame(1);
+        this.player_1.setVelocityX(-200);
+        this.player_1.anims.play("player-1-esquerda");
+      })
+      .on("pointerout", () => {
+        this.esquerda.setFrame(0);
+        this.player_1.setVelocityX(0);
+        this.player_1.anims.play("player-1-paradoesquerda");
+      })
+      .setScrollFactor(0);
+
+    this.direita = this.add
+      .sprite(735, 400, "direita", 0)
+      .setInteractive()
+      .on("pointerover", () => {
+        this.direita.setFrame(1);
+        this.player_1.setVelocityX(200);
+        this.player_1.anims.play("player-1-direita");
+      })
+      .on("pointerout", () => {
+        this.direita.setFrame(0);
+        this.player_1.setVelocityX(0);
+        this.player_1.anims.play("player-1-paradodireita");
+      })
+      .setScrollFactor(0);
+
+    this.tela_cheia = this.add
+      .sprite(750, 50, "tela-cheia", 0)
+      .setInteractive()
+      .on("pointerdown", () => {
+        if (this.scale.isFullscreen) {
+          this.tela_cheia.setFrame(0);
+          this.scale.stopFullscreen();
+        } else {
+          this.tela_cheia.setFrame(1);
+          this.scale.startFullscreen();
+        }
+      })
+      .setScrollFactor(0);
 
     /* Colisão com os limites da cena */
     this.player_1.setCollideWorldBounds(true);
