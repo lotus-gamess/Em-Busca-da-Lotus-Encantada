@@ -39,6 +39,16 @@ export default class principal extends Phaser.Scene {
 
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
+    this.load.spritesheet("lava", "./assets/objeto/lava.png", {
+      frameWidth: 64,
+      frameHeight: 48,
+    });
+
+    this.load.spritesheet("cobra", "./assets/objeto/cobra.png", {
+      frameWidth: 64,
+      frameHeight: 48,
+    });
+
     // Botões
 
     this.load.spritesheet("cima", "./assets/botao/cima.png", {
@@ -258,7 +268,7 @@ export default class principal extends Phaser.Scene {
       this
     );
 
-    // Animação de lista de objetos
+    // Animação de lista de flores laranja
     this.flores_laranja = [
       {
         x: 450,
@@ -318,6 +328,59 @@ export default class principal extends Phaser.Scene {
       );
     });
 
+    // Animação da lava
+    this.lava = [
+      {
+        x: 833,
+        y: 585,
+        objeto: undefined,
+      },
+      {
+        x: 890,
+        y: 585,
+        objeto: undefined,
+      },
+      {
+        x: 927,
+        y: 585,
+        objeto: undefined,
+      },
+      {
+        x: 1153,
+        y: 585,
+        objeto: undefined,
+      },
+      {
+        x: 1184,
+        y: 585,
+        objeto: undefined,
+      },
+    ];
+
+    this.anims.create({
+      key: "lava-borbulhando",
+      frames: this.anims.generateFrameNumbers("lava", {
+        start: 0,
+        end: 5,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.lava.forEach((item) => {
+      item.objeto = this.physics.add.sprite(item.x, item.y, "lava");
+      item.objeto.body.setAllowGravity(false);
+      item.objeto.body.setImmovable();
+      item.objeto.play("lava-borbulhando");
+      this.physics.add.collider(
+        this.player_1,
+        item.objeto,
+        this.cair_na_lava,
+        null,
+        this
+      );
+    });
+
     /* Colisão com os limites da cena */
     this.player_1.setCollideWorldBounds(true);
 
@@ -326,5 +389,14 @@ export default class principal extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 2496, 640);
     this.cameras.main.startFollow(this.player_1);
   }
+
+  update() {}
+
+  pegar_flor_laranja(jogador, flor) {
+    flor.disableBody(true, true);
+  }
+
+  cair_na_lava() {
+    this.game.scene.stop();
+  }
 }
-  
