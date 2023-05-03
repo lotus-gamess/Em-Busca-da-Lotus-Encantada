@@ -40,12 +40,12 @@ export default class principal extends Phaser.Scene {
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
     this.load.spritesheet("lava", "./assets/objeto/lava.png", {
-      frameWidth: 64,
-      frameHeight: 48,
+      frameWidth: 48,
+      frameHeight: 36,
     });
 
-    this.load.spritesheet("cobra", "./assets/objeto/cobra.png", {
-      frameWidth: 64,
+    this.load.spritesheet("bandeira", "./assets/objeto/bandeira.png", {
+      frameWidth: 48,
       frameHeight: 48,
     });
 
@@ -76,12 +76,17 @@ export default class principal extends Phaser.Scene {
     // Sons
 
     this.load.audio("fairy-tale", "./assets/musica/fairy-tale.mp3");
+    this.load.audio("efeito-flor", "./assets/musica/efeito-flor.mp3");
   }
 
   create() {
+    
     // Trilha sonora
     this.trilha = this.sound.add("fairy-tale");
     this.trilha.play();
+
+    // Efeito sonoro
+    this.efeito_flor = this.sound.add("efeito-flor");
 
     // Mapa1
 
@@ -270,28 +275,33 @@ export default class principal extends Phaser.Scene {
     // Animação da lava
     this.lava = [
       {
-        x: 833,
-        y: 585,
+        x: 824,
+        y: 590,
         objeto: undefined,
       },
       {
-        x: 890,
-        y: 585,
+        x: 872,
+        y: 590,
         objeto: undefined,
       },
       {
-        x: 927,
-        y: 585,
+        x: 920,
+        y: 590,
         objeto: undefined,
       },
       {
-        x: 1153,
-        y: 585,
+        x: 936,
+        y: 590,
         objeto: undefined,
       },
       {
-        x: 1184,
-        y: 585,
+        x: 1144,
+        y: 590,
+        objeto: undefined,
+      },
+      {
+        x: 1192,
+        y: 590,
         objeto: undefined,
       },
     ];
@@ -394,6 +404,7 @@ export default class principal extends Phaser.Scene {
 
   pegar_flor_laranja(jogador, flor) {
     flor.disableBody(true, true);
+    this.efeito_flor.play();
   }
 
   cair_na_lava() {
