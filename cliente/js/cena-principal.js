@@ -40,8 +40,8 @@ export default class principal extends Phaser.Scene {
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
     this.load.spritesheet("lava", "./assets/objeto/lava.png", {
-      frameWidth: 48,
-      frameHeight: 36,
+      frameWidth: 40,
+      frameHeight: 30,
     });
 
     this.load.spritesheet("bandeira", "./assets/objeto/bandeira.png", {
@@ -112,6 +112,18 @@ export default class principal extends Phaser.Scene {
       0,
       0
     );
+
+    if (this.game.jogadores.primeiro === this.game.socket.id) {
+      this.local = "robo-1";
+      this.jogador_1 = this.physics.add.sprite(300, 225, this.local);
+      this.remoto = "robo-2";
+      this.jogador_2 = this.add.sprite(600, 225, this.remoto);
+    } else {
+      this.remoto = "robo-1";
+      this.jogador_2 = this.add.sprite(300, 225, this.remoto);
+      his.local = "robo-2";
+      this.jogador_1 = this.physics.add.sprite(600, 225, this.local);
+    }
 
     // Player 1 - animações
 
@@ -275,33 +287,33 @@ export default class principal extends Phaser.Scene {
     // Animação da lava
     this.lava = [
       {
-        x: 824,
-        y: 590,
-        objeto: undefined,
-      },
-      {
-        x: 872,
-        y: 590,
+        x: 883,
+        y: 592,
         objeto: undefined,
       },
       {
         x: 920,
-        y: 590,
+        y: 592,
         objeto: undefined,
       },
       {
-        x: 936,
-        y: 590,
+        x: 941,
+        y: 592,
         objeto: undefined,
       },
       {
-        x: 1144,
-        y: 590,
+        x: 1139,
+        y: 592,
         objeto: undefined,
       },
       {
-        x: 1192,
-        y: 590,
+        x: 1176,
+        y: 592,
+        objeto: undefined,
+      },
+      {
+        x: 1197,
+        y: 592,
         objeto: undefined,
       },
     ];
@@ -400,7 +412,19 @@ export default class principal extends Phaser.Scene {
     this.cameras.main.startFollow(this.player_1);
   }
 
-  update() {}
+  update() {
+    let frame;
+    try {
+      frame = this.jogador_1.anims.getFrameName();
+    } catch (e) {
+      frame = 0;
+    }
+    this.game.socket.emit("estado-publicar", this.game.sala, {
+      frame: frame,
+      x: this.jogador_1.body.x + 32,
+      y: this.jogador_1.body.y + 32,
+    });
+  }
 
   pegar_flor_laranja(jogador, flor) {
     flor.disableBody(true, true);

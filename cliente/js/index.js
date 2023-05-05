@@ -9,6 +9,11 @@ class Game extends Phaser.Game {
   constructor() {
     super(config);
 
+    this.socket = io();
+    this.socket.on("connect", () => {
+      console.log("Conectado ao servidor para troca de mensagens.");
+    });
+
     this.scene.add("abertura", abertura);
     this.scene.add("principal", principal);
     //this.scene.add("encerramento", game_over);
