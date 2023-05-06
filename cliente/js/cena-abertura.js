@@ -4,17 +4,17 @@ export default class abertura extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("abertura", "./assets/abertura/abertura.png");
+    // Tela abertura
+    this.load.image("abertura", "./assets/abertura/abertura.png")
   }
 
   create() {
-    this.imagem = this.add
-      .image(400, 225, "abertura")
-      .setInteractive()
-      .on("pointerdown", () => {
-        this.imagem.destroy();
-        this.game.scene.start("principal");
-      });
+    this.imagem = this.add.image(400, 225, "abertura")
+    this.mensagem = this.add.text(100, 75, "Escolha uma sala para entrar:", {
+      fontFamily: "monospace",
+      font: "32px Courier",
+      fill: "#cccccc",
+    });
 
     this.salas = [
       {

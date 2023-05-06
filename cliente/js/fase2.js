@@ -1,17 +1,17 @@
-export default class principal extends Phaser.Scene {
+export default class fase2 extends Phaser.Scene {
   constructor() {
-    super("principal");
+    super("fase2");
   }
 
   preload() {
     // Mapa
     // Tilemap
-    this.load.tilemapTiledJSON("mapa1", "./assets/mapa1/mapa1.json");
+    this.load.tilemapTiledJSON("mapa2", "./assets/mapa2/mapa2.json");
 
     // Tilesets
 
-    // Mapa 1
-    this.load.image("plataforma5", "./assets/mapa1/plataforma5.png");
+    // Mapa 2
+    this.load.image("plataforma2", "./assets/mapa2/plataforma2.png");
 
     // Corpo do player 1
     this.load.spritesheet("player-1", "./assets/player-1/player1.png", {
@@ -80,7 +80,6 @@ export default class principal extends Phaser.Scene {
   }
 
   create() {
-    
     // Trilha sonora
     this.trilha = this.sound.add("fairy-tale");
     this.trilha.play();
@@ -92,23 +91,23 @@ export default class principal extends Phaser.Scene {
 
     // Tilemap
 
-    this.mapa1 = this.make.tilemap({
-      key: "mapa1",
+    this.mapa2 = this.make.tilemap({
+      key: "mapa2",
     });
 
-    this.tileset_plataforma5 = this.mapa1.addTilesetImage("plataforma5");
+    this.tileset_plataforma2 = this.mapa1.addTilesetImage("plataforma2");
 
     // Layer 0: fundo
-    this.fundo = this.mapa1.createLayer(
+    this.fundo = this.mapa2.createLayer(
       "fundo",
-      this.tileset_plataforma5,
+      this.tileset_plataforma2,
       0,
       0
     );
 
-    this.plataforma = this.mapa1.createLayer(
+    this.plataforma = this.mapa2.createLayer(
       "plataforma",
-      this.tileset_plataforma5,
+      this.tileset_plataforma2,
       0,
       0
     );
@@ -401,7 +400,6 @@ export default class principal extends Phaser.Scene {
   }
 
   update() {}
-
   pegar_flor_laranja(jogador, flor) {
     flor.disableBody(true, true);
     this.efeito_flor.play();
