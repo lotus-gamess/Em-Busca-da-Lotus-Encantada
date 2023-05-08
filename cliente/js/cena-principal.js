@@ -32,6 +32,14 @@ export default class principal extends Phaser.Scene {
       frameWidth: 48,
       frameHeight: 48,
     });
+    this.load.spritesheet(
+      "player-2-parado",
+      "./assets/player-2/player2-parado.png",
+      {
+        frameWidth: 48,
+        frameHeight: 48,
+      }
+    );
 
     // Objetos
 
@@ -80,7 +88,6 @@ export default class principal extends Phaser.Scene {
   }
 
   create() {
-    
     // Trilha sonora
     this.trilha = this.sound.add("fairy-tale");
     this.trilha.play();
@@ -113,13 +120,27 @@ export default class principal extends Phaser.Scene {
       0
     );
 
-    // Player 1 - animações
+    // Player 1
 
-    this.player_1 = this.physics.add.sprite(40, 500, "player-1");
+    if (this.game.jogadores.primeiro === this.game.socket.id) {
+      this.local = "player-1";
+      this.local_parado = "player-1-parado";
+      this.player_1 = this.physics.add.sprite(300, 225, this.local);
+      this.remoto = "player-2";
+      this.remoto_parado = "player-2-parado";
+      this.player_2 = this.add.sprite(600, 225, this.remoto);
+    } else {
+      this.remoto = "player-1";
+      this.remoto_parado = "player-1-parado";
+      this.player_2 = this.add.sprite(300, 225, this.remoto);
+      this.local = "player-2";
+      this.local_parado = "player-2-parado";
+      this.player_1 = this.physics.add.sprite(600, 225, this.local);
+    }
 
     this.anims.create({
       key: "player-1-paradocostas",
-      frames: this.anims.generateFrameNumbers("player-1-parado", {
+      frames: this.anims.generateFrameNumbers(this.local_parado, {
         start: 0,
         end: 1,
       }),
@@ -129,7 +150,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradofrente",
-      frames: this.anims.generateFrameNumbers("player-1-parado", {
+      frames: this.anims.generateFrameNumbers(this.local_parado, {
         start: 2,
         end: 3,
       }),
@@ -139,7 +160,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradoesquerda",
-      frames: this.anims.generateFrameNumbers("player-1-parado", {
+      frames: this.anims.generateFrameNumbers(this.local_parado, {
         start: 4,
         end: 5,
       }),
@@ -149,7 +170,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradodireita",
-      frames: this.anims.generateFrameNumbers("player-1-parado", {
+      frames: this.anims.generateFrameNumbers(this.local_parado, {
         start: 6,
         end: 7,
       }),
@@ -159,7 +180,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-frente",
-      frames: this.anims.generateFrameNumbers("player-1", {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 0,
         end: 2,
       }),
@@ -169,7 +190,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-esquerda",
-      frames: this.anims.generateFrameNumbers("player-1", {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 3,
         end: 5,
       }),
@@ -179,7 +200,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-direita",
-      frames: this.anims.generateFrameNumbers("player-1", {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 6,
         end: 8,
       }),
@@ -189,15 +210,13 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-costas",
-      frames: this.anims.generateFrameNumbers("player-1", {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 9,
         end: 11,
       }),
       frameRate: 10,
       repeat: -1,
     });
-    //
-    this.player_2 = this.add.sprite(600, 225, "player-2");
     //
 
     /* Colisões por tile */
@@ -263,7 +282,8 @@ export default class principal extends Phaser.Scene {
     this.flores_laranja.forEach((item) => {
       item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
       item.objeto.body.setAllowGravity(false);
-      this.physics.add.collider(
+      item.objeto.body.setImmovable();
+      this.physics.add.overlap(
         this.player_1,
         item.objeto,
         this.pegar_flor_laranja,
@@ -400,11 +420,25 @@ export default class principal extends Phaser.Scene {
     this.cameras.main.startFollow(this.player_1);
   }
 
-  update() {}
+  update() {
+    let frame;
+    try {
+      frame = this.player_1.anims.getFrameName();
+    } catch (e) {
+      frame = 0;
+    }
+    this.game.socket.emit("estado-publicar", this.game.sala, {
+      frame: frame,
+      x: this.player_1.body.x + 32,
+      y: this.player_1.body.y + 32,
+    });
+  }
 
   pegar_flor_laranja(jogador, flor) {
-    flor.disableBody(true, true);
-    this.efeito_flor.play();
+    if (this.game.jogadores.primeiro === this.game.socket.id) {
+      flor.disableBody(true, true);
+      this.efeito_flor.play();
+    }
   }
 
   cair_na_lava() {
