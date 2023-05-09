@@ -292,7 +292,7 @@ export default class fase3 extends Phaser.Scene {
       );
     });
 
-    // Animação da lava
+    // Animação da lava - Parte 1
     this.lava = [
       {
         x: 85,
@@ -351,6 +351,106 @@ export default class fase3 extends Phaser.Scene {
       },
       {
         x: 520,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 560,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 600,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 640,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 680,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 720,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 760,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 800,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 812,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 916,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 956,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 996,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1036,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1076,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1116,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1156,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1196,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1236,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1276,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1316,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 1356,
         y: 635,
         objeto: undefined,
       },

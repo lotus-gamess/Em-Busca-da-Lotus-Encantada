@@ -295,23 +295,23 @@ export default class fase2 extends Phaser.Scene {
     // Animação da lava
     this.lava = [
       {
-        x: 883,
-        y: 592,
+        x: 309,
+        y: 635,
         objeto: undefined,
       },
       {
-        x: 920,
-        y: 592,
+        x: 331,
+        y: 635,
         objeto: undefined,
       },
       {
-        x: 941,
-        y: 592,
+        x: 628,
+        y: 635,
         objeto: undefined,
       },
       {
-        x: 1139,
-        y: 592,
+        x: 651,
+        y: 635,
         objeto: undefined,
       },
       {
