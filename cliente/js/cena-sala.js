@@ -101,7 +101,7 @@ export default class sala extends Phaser.Scene {
       if (jogadores.segundo) {
         this.mensagem.destroy();
         this.game.jogadores = jogadores;
-        this.game.scene.start("principal");
+        this.game.scene.start("fase3");
       } else if (jogadores.primeiro) {
         this.grade.destroy();
         this.imagem.destroy();

@@ -1,17 +1,17 @@
-export default class fase2 extends Phaser.Scene {
+export default class fase3 extends Phaser.Scene {
   constructor() {
-    super("fase2");
+    super("fase3");
   }
 
   preload() {
     // Mapa
     // Tilemap
-    this.load.tilemapTiledJSON("mapa2", "./assets/mapa2/mapa2.json");
+    this.load.tilemapTiledJSON("mapa3", "./assets/mapa3/mapa3.json");
 
     // Tilesets
 
-    // Mapa 2
-    this.load.image("plataforma2", "./assets/mapa2/plataforma2.png");
+    // Mapa 1
+    this.load.image("plataforma3", "./assets/mapa3/plataforma3.png");
 
     // Corpo do player 1
     this.load.spritesheet("player-1", "./assets/player-1/player1.png", {
@@ -95,27 +95,27 @@ export default class fase2 extends Phaser.Scene {
     // Efeito sonoro
     this.efeito_flor = this.sound.add("efeito-flor");
 
-    // Mapa2
+    // Mapa3
 
     // Tilemap
 
-    this.mapa2 = this.make.tilemap({
-      key: "mapa2",
+    this.mapa3 = this.make.tilemap({
+      key: "mapa3",
     });
 
-    this.tileset_plataforma2 = this.mapa2.addTilesetImage("plataforma2");
+    this.tileset_plataforma3 = this.mapa3.addTilesetImage("plataforma3");
 
     // Layer 0: fundo
-    this.fundo = this.mapa2.createLayer(
+    this.fundo = this.mapa3.createLayer(
       "fundo",
-      this.tileset_plataforma2,
+      this.tileset_plataforma3,
       0,
       0
     );
 
-    this.plataforma = this.mapa2.createLayer(
+    this.plataforma = this.mapa3.createLayer(
       "plataforma",
-      this.tileset_plataforma2,
+      this.tileset_plataforma3,
       0,
       0
     );
@@ -295,33 +295,63 @@ export default class fase2 extends Phaser.Scene {
     // Animação da lava
     this.lava = [
       {
-        x: 883,
-        y: 592,
+        x: 85,
+        y: 635,
         objeto: undefined,
       },
       {
-        x: 920,
-        y: 592,
+        x: 120,
+        y: 635,
         objeto: undefined,
       },
       {
-        x: 941,
-        y: 592,
+        x: 160,
+        y: 635,
         objeto: undefined,
       },
       {
-        x: 1139,
-        y: 592,
+        x: 200,
+        y: 635,
         objeto: undefined,
       },
       {
-        x: 1176,
-        y: 592,
+        x: 240,
+        y: 635,
         objeto: undefined,
       },
       {
-        x: 1197,
-        y: 592,
+        x: 280,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 320,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 360,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 400,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 440,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 480,
+        y: 635,
+        objeto: undefined,
+      },
+      {
+        x: 520,
+        y: 635,
         objeto: undefined,
       },
     ];
