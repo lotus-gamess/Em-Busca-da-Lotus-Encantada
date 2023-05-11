@@ -234,18 +234,18 @@ export default class principal extends Phaser.Scene {
     // Animação de lista de flores laranja
     this.flores_laranja = [
       {
-        x: 450,
-        y: 550,
-        objeto: undefined,
-      },
-      {
-        x: 250,
-        y: 360,
+        x: 580,
+        y: 340,
         objeto: undefined,
       },
       {
         x: 90,
-        y: 180,
+        y: 240,
+        objeto: undefined,
+      },
+      {
+        x: 295,
+        y: 205,
         objeto: undefined,
       },
       {
@@ -254,28 +254,23 @@ export default class principal extends Phaser.Scene {
         objeto: undefined,
       },
       {
-        x: 1060,
-        y: 480,
+        x: 1152,
+        y: 400,
         objeto: undefined,
       },
       {
-        x: 1550,
-        y: 550,
-        objeto: undefined,
-      },
-      {
-        x: 850,
-        y: 110,
-        objeto: undefined,
-      },
-      {
-        x: 2150,
+        x: 1535,
         y: 200,
         objeto: undefined,
       },
       {
+        x: 1660,
+        y: 550,
+        objeto: undefined,
+      },
+      {
         x: 2460,
-        y: 350,
+        y: 550,
         objeto: undefined,
       },
     ];
@@ -296,32 +291,32 @@ export default class principal extends Phaser.Scene {
     this.lava = [
       {
         x: 883,
-        y: 592,
+        y: 598,
         objeto: undefined,
       },
       {
         x: 920,
-        y: 592,
+        y: 598,
         objeto: undefined,
       },
       {
         x: 941,
-        y: 592,
+        y: 598,
         objeto: undefined,
       },
       {
         x: 1139,
-        y: 592,
+        y: 598,
         objeto: undefined,
       },
       {
         x: 1176,
-        y: 592,
+        y: 598,
         objeto: undefined,
       },
       {
         x: 1197,
-        y: 592,
+        y: 598,
         objeto: undefined,
       },
     ];
@@ -418,6 +413,12 @@ export default class principal extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 2496, 640);
     this.physics.world.setBounds(0, 0, 2496, 640);
     this.cameras.main.startFollow(this.player_1);
+
+    this.game.socket.on("estado-notificar", ({ frame, x, y }) => {
+      this.player_2.setFrame(frame);
+      this.player_2.x = x + 24;
+      this.player_2.y = y + 24;
+    });
   }
 
   update() {
@@ -429,9 +430,10 @@ export default class principal extends Phaser.Scene {
     }
     this.game.socket.emit("estado-publicar", this.game.sala, {
       frame: frame,
-      x: this.player_1.body.x + 32,
-      y: this.player_1.body.y + 32,
+      x: this.player_1.body.x,
+      y: this.player_1.body.y,
     });
+
   }
 
   pegar_flor_laranja(jogador, flor) {
