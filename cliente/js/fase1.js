@@ -1,6 +1,6 @@
-export default class principal extends Phaser.Scene {
+export default class fase1 extends Phaser.Scene {
   constructor() {
-    super("principal");
+    super("fase1");
   }
 
   preload() {
@@ -18,28 +18,12 @@ export default class principal extends Phaser.Scene {
       frameWidth: 48,
       frameHeight: 48,
     });
-    this.load.spritesheet(
-      "player-1-parado",
-      "./assets/player-1/player1-parado.png",
-      {
-        frameWidth: 48,
-        frameHeight: 48,
-      }
-    );
 
     // Corpo do player 2
     this.load.spritesheet("player-2", "./assets/player-2/player2.png", {
       frameWidth: 48,
       frameHeight: 48,
     });
-    this.load.spritesheet(
-      "player-2-parado",
-      "./assets/player-2/player2-parado.png",
-      {
-        frameWidth: 48,
-        frameHeight: 48,
-      }
-    );
 
     // Objetos
 
@@ -50,11 +34,6 @@ export default class principal extends Phaser.Scene {
     this.load.spritesheet("lava", "./assets/objeto/lava.png", {
       frameWidth: 40,
       frameHeight: 30,
-    });
-
-    this.load.spritesheet("bandeira", "./assets/objeto/bandeira.png", {
-      frameWidth: 48,
-      frameHeight: 48,
     });
 
     // Botões
@@ -124,23 +103,19 @@ export default class principal extends Phaser.Scene {
 
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       this.local = "player-1";
-      this.local_parado = "player-1-parado";
-      this.player_1 = this.physics.add.sprite(300, 225, this.local);
+      this.player_1 = this.physics.add.sprite(150, 520, this.local);
       this.remoto = "player-2";
-      this.remoto_parado = "player-2-parado";
-      this.player_2 = this.add.sprite(600, 225, this.remoto);
+      this.player_2 = this.add.sprite(200, 520, this.remoto);
     } else {
       this.remoto = "player-1";
-      this.remoto_parado = "player-1-parado";
-      this.player_2 = this.add.sprite(300, 225, this.remoto);
+      this.player_2 = this.add.sprite(150, 520, this.remoto);
       this.local = "player-2";
-      this.local_parado = "player-2-parado";
-      this.player_1 = this.physics.add.sprite(600, 225, this.local);
+      this.player_1 = this.physics.add.sprite(200, 520, this.local);
     }
 
     this.anims.create({
       key: "player-1-paradocostas",
-      frames: this.anims.generateFrameNumbers(this.local_parado, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 0,
         end: 1,
       }),
@@ -150,7 +125,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradofrente",
-      frames: this.anims.generateFrameNumbers(this.local_parado, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 2,
         end: 3,
       }),
@@ -160,7 +135,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradoesquerda",
-      frames: this.anims.generateFrameNumbers(this.local_parado, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 4,
         end: 5,
       }),
@@ -170,7 +145,7 @@ export default class principal extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradodireita",
-      frames: this.anims.generateFrameNumbers(this.local_parado, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 6,
         end: 7,
       }),
@@ -181,8 +156,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: "player-1-frente",
       frames: this.anims.generateFrameNumbers(this.local, {
-        start: 0,
-        end: 2,
+        start: 8,
+        end: 10,
       }),
       frameRate: 10,
       repeat: -1,
@@ -191,8 +166,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: "player-1-esquerda",
       frames: this.anims.generateFrameNumbers(this.local, {
-        start: 3,
-        end: 5,
+        start: 11,
+        end: 13,
       }),
       frameRate: 10,
       repeat: -1,
@@ -201,8 +176,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: "player-1-direita",
       frames: this.anims.generateFrameNumbers(this.local, {
-        start: 6,
-        end: 8,
+        start: 14,
+        end: 16,
       }),
       frameRate: 10,
       repeat: -1,
@@ -211,8 +186,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: "player-1-costas",
       frames: this.anims.generateFrameNumbers(this.local, {
-        start: 9,
-        end: 11,
+        start: 17,
+        end: 20,
       }),
       frameRate: 10,
       repeat: -1,
@@ -282,6 +257,62 @@ export default class principal extends Phaser.Scene {
         this.player_1,
         item.objeto,
         this.pegar_flor_laranja,
+        null,
+        this
+      );
+    });
+
+    // Animação de lista de flores lilás
+    this.flores_lilas = [
+      {
+        x: 770,
+        y: 550,
+        objeto: undefined,
+      },
+      {
+        x: 1540,
+        y: 550,
+        objeto: undefined,
+      },
+      {
+        x: 1250,
+        y: 305,
+        objeto: undefined,
+      },
+      {
+        x: 870,
+        y: 100,
+        objeto: undefined,
+      },
+      {
+        x: 1600,
+        y: 100,
+        objeto: undefined,
+      },
+      {
+        x: 1660,
+        y: 238,
+        objeto: undefined,
+      },
+      {
+        x: 2238,
+        y: 135,
+        objeto: undefined,
+      },
+      {
+        x: 1850,
+        y: 400,
+        objeto: undefined,
+      },
+    ];
+    this.flores_lilas.forEach((item) => {
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas");
+      item.objeto.body.setAllowGravity(false);
+      item.objeto.body.setImmovable();
+      this.physics.add.overlap(
+        this.player_1,
+        item.objeto,
+        this.pegar_flor_lilas,
         null,
         this
       );
@@ -433,11 +464,17 @@ export default class principal extends Phaser.Scene {
       x: this.player_1.body.x,
       y: this.player_1.body.y,
     });
-
   }
 
   pegar_flor_laranja(jogador, flor) {
     if (this.game.jogadores.primeiro === this.game.socket.id) {
+      flor.disableBody(true, true);
+      this.efeito_flor.play();
+    }
+  }
+
+  pegar_flor_lilas(jogador, flor) {
+    if (this.game.jogadores.segundo === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
     }

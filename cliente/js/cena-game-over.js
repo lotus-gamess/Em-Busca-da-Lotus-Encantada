@@ -15,7 +15,7 @@ export default class fim_do_jogo extends Phaser.Scene {
       .on("pointerdown", () => {
         this.imagem.destroy();
         this.texto.destroy();
-        this.game.scene.start("principal");
+        this.game.scene.start("fase1");
       });
 
     this.texto = this.add.text(490, 50, "Game over.", {
