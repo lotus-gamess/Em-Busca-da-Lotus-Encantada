@@ -2,7 +2,7 @@ import config from "./config.js";
 
 import abertura from "./cena-abertura.js";
 import sala from "./cena-sala.js";
-import fase1 from "./cena-fase1.js";
+import fase1 from "./fase1.js";
 import fase2 from "./fase2.js";
 import fase3 from "./fase3.js";
 // import game_over from "./cena-game-over.js";

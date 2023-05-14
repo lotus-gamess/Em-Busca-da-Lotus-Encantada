@@ -18,28 +18,12 @@ export default class fase2 extends Phaser.Scene {
       frameWidth: 48,
       frameHeight: 48,
     });
-    this.load.spritesheet(
-      "player-1-parado",
-      "./assets/player-1/player1-parado.png",
-      {
-        frameWidth: 48,
-        frameHeight: 48,
-      }
-    );
 
     // Corpo do player 2
     this.load.spritesheet("player-2", "./assets/player-2/player2.png", {
       frameWidth: 48,
       frameHeight: 48,
     });
-    this.load.spritesheet(
-      "player-2-parado",
-      "./assets/player-2/player2-parado.png",
-      {
-        frameWidth: 48,
-        frameHeight: 48,
-      }
-    );
 
     // Objetos
 
@@ -50,11 +34,6 @@ export default class fase2 extends Phaser.Scene {
     this.load.spritesheet("lava", "./assets/objeto/lava.png", {
       frameWidth: 40,
       frameHeight: 30,
-    });
-
-    this.load.spritesheet("bandeira", "./assets/objeto/bandeira.png", {
-      frameWidth: 48,
-      frameHeight: 48,
     });
 
     // Botões
@@ -124,23 +103,19 @@ export default class fase2 extends Phaser.Scene {
 
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       this.local = "player-1";
-      this.local_parado = "player-1-parado";
-      this.player_1 = this.physics.add.sprite(300, 225, this.local);
+      this.player_1 = this.physics.add.sprite(1260, 490, this.local);
       this.remoto = "player-2";
-      this.remoto_parado = "player-2-parado";
-      this.player_2 = this.add.sprite(600, 225, this.remoto);
+      this.player_2 = this.add.sprite(1300, 490, this.remoto);
     } else {
       this.remoto = "player-1";
-      this.remoto_parado = "player-1-parado";
-      this.player_2 = this.add.sprite(300, 225, this.remoto);
+      this.player_2 = this.add.sprite(1260, 490, this.remoto);
       this.local = "player-2";
-      this.local_parado = "player-2-parado";
-      this.player_1 = this.physics.add.sprite(600, 225, this.local);
+      this.player_1 = this.physics.add.sprite(1300, 490, this.local);
     }
 
     this.anims.create({
       key: "player-1-paradocostas",
-      frames: this.anims.generateFrameNumbers(this.local_parado, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 0,
         end: 1,
       }),
@@ -150,7 +125,7 @@ export default class fase2 extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradofrente",
-      frames: this.anims.generateFrameNumbers(this.local_parado, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 2,
         end: 3,
       }),
@@ -160,7 +135,7 @@ export default class fase2 extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradoesquerda",
-      frames: this.anims.generateFrameNumbers(this.local_parado, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 4,
         end: 5,
       }),
@@ -170,7 +145,7 @@ export default class fase2 extends Phaser.Scene {
 
     this.anims.create({
       key: "player-1-paradodireita",
-      frames: this.anims.generateFrameNumbers(this.local_parado, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 6,
         end: 7,
       }),
@@ -181,8 +156,8 @@ export default class fase2 extends Phaser.Scene {
     this.anims.create({
       key: "player-1-frente",
       frames: this.anims.generateFrameNumbers(this.local, {
-        start: 0,
-        end: 2,
+        start: 8,
+        end: 10,
       }),
       frameRate: 10,
       repeat: -1,
@@ -191,8 +166,8 @@ export default class fase2 extends Phaser.Scene {
     this.anims.create({
       key: "player-1-esquerda",
       frames: this.anims.generateFrameNumbers(this.local, {
-        start: 3,
-        end: 5,
+        start: 11,
+        end: 13,
       }),
       frameRate: 10,
       repeat: -1,
@@ -201,8 +176,8 @@ export default class fase2 extends Phaser.Scene {
     this.anims.create({
       key: "player-1-direita",
       frames: this.anims.generateFrameNumbers(this.local, {
-        start: 6,
-        end: 8,
+        start: 14,
+        end: 16,
       }),
       frameRate: 10,
       repeat: -1,
@@ -211,8 +186,8 @@ export default class fase2 extends Phaser.Scene {
     this.anims.create({
       key: "player-1-costas",
       frames: this.anims.generateFrameNumbers(this.local, {
-        start: 9,
-        end: 11,
+        start: 17,
+        end: 20,
       }),
       frameRate: 10,
       repeat: -1,
@@ -234,48 +209,43 @@ export default class fase2 extends Phaser.Scene {
     // Animação de lista de flores laranja
     this.flores_laranja = [
       {
-        x: 450,
+        x: 180,
         y: 550,
         objeto: undefined,
       },
       {
-        x: 250,
-        y: 360,
+        x: 700,
+        y: 510,
         objeto: undefined,
       },
       {
-        x: 90,
-        y: 180,
-        objeto: undefined,
-      },
-      {
-        x: 850,
-        y: 330,
-        objeto: undefined,
-      },
-      {
-        x: 1060,
-        y: 480,
-        objeto: undefined,
-      },
-      {
-        x: 1550,
+        x: 1110,
         y: 550,
         objeto: undefined,
       },
       {
-        x: 850,
-        y: 110,
+        x: 1040,
+        y: 390,
         objeto: undefined,
       },
       {
-        x: 2150,
-        y: 200,
+        x: 610,
+        y: 250,
         objeto: undefined,
       },
       {
-        x: 2460,
-        y: 350,
+        x: 350,
+        y: 370,
+        objeto: undefined,
+      },
+      {
+        x: 135,
+        y: 100,
+        objeto: undefined,
+      },
+      {
+        x: 1000,
+        y: 130,
         objeto: undefined,
       },
     ];
@@ -292,36 +262,167 @@ export default class fase2 extends Phaser.Scene {
       );
     });
 
+    // Animação de lista de flores lilás
+    this.flores_lilas = [
+      {
+        x: 2380,
+        y: 550,
+        objeto: undefined,
+      },
+      {
+        x: 1865,
+        y: 510,
+        objeto: undefined,
+      },
+      {
+        x: 1448,
+        y: 550,
+        objeto: undefined,
+      },
+      {
+        x: 1521,
+        y: 390,
+        objeto: undefined,
+      },
+      {
+        x: 1950,
+        y: 250,
+        objeto: undefined,
+      },
+      {
+        x: 2209,
+        y: 370,
+        objeto: undefined,
+      },
+      {
+        x: 2420,
+        y: 100,
+        objeto: undefined,
+      },
+      {
+        x: 1560,
+        y: 130,
+        objeto: undefined,
+      },
+    ];
+    this.flores_lilas.forEach((item) => {
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas");
+      item.objeto.body.setAllowGravity(false);
+      item.objeto.body.setImmovable();
+      this.physics.add.overlap(
+        this.player_1,
+        item.objeto,
+        this.pegar_flor_lilas,
+        null,
+        this
+      );
+    });
+
     // Animação da lava
     this.lava = [
       {
-        x: 309,
-        y: 635,
+        x: 308,
+        y: 598,
         objeto: undefined,
       },
       {
         x: 331,
-        y: 635,
+        y: 598,
         objeto: undefined,
       },
       {
-        x: 628,
-        y: 635,
+        x: 948,
+        y: 598,
         objeto: undefined,
       },
       {
-        x: 651,
-        y: 635,
+        x: 971,
+        y: 598,
         objeto: undefined,
       },
       {
-        x: 1176,
-        y: 592,
+        x: 1588,
+        y: 598,
         objeto: undefined,
       },
       {
-        x: 1197,
-        y: 592,
+        x: 1611,
+        y: 598,
+        objeto: undefined,
+      },
+      {
+        x: 2228,
+        y: 598,
+        objeto: undefined,
+      },
+      {
+        x: 2251,
+        y: 598,
+        objeto: undefined,
+      },
+      {
+        x: 1043,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1083,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1123,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1163,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1203,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1243,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1283,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1323,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1363,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1403,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1443,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1483,
+        y: 279,
+        objeto: undefined,
+      },
+      {
+        x: 1517,
+        y: 279,
         objeto: undefined,
       },
     ];
@@ -418,6 +519,12 @@ export default class fase2 extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 2496, 640);
     this.physics.world.setBounds(0, 0, 2496, 640);
     this.cameras.main.startFollow(this.player_1);
+
+    this.game.socket.on("estado-notificar", ({ frame, x, y }) => {
+      this.player_2.setFrame(frame);
+      this.player_2.x = x + 24;
+      this.player_2.y = y + 24;
+    });
   }
 
   update() {
@@ -429,13 +536,20 @@ export default class fase2 extends Phaser.Scene {
     }
     this.game.socket.emit("estado-publicar", this.game.sala, {
       frame: frame,
-      x: this.player_1.body.x + 32,
-      y: this.player_1.body.y + 32,
+      x: this.player_1.body.x,
+      y: this.player_1.body.y,
     });
   }
 
   pegar_flor_laranja(jogador, flor) {
     if (this.game.jogadores.primeiro === this.game.socket.id) {
+      flor.disableBody(true, true);
+      this.efeito_flor.play();
+    }
+  }
+
+  pegar_flor_lilas(jogador, flor) {
+    if (this.game.jogadores.segundo === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
     }
