@@ -25,6 +25,12 @@ export default class fase1 extends Phaser.Scene {
       frameHeight: 48,
     });
 
+    // Inimigos
+    this.load.spritesheet("cobra", "./assets/cobra/cobra.png", {
+      frameWidth: 64,
+      frameHeight: 48,
+    });
+
     // Objetos
 
     this.load.image("flor-lilas", "./assets/objeto/flor-lilas.png");
@@ -192,7 +198,42 @@ export default class fase1 extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-    //
+
+    /* Inimigos */
+    this.cobra = this.physics.add.sprite(150, 520, "cobra");
+
+    this.anims.create({
+      key: "cobra-esquerda",
+      frames: this.anims.generateFrameNumbers("cobra", {
+        start: 0,
+        end: 9,
+      }),
+      frameRate: 30,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "cobra-direita",
+      frames: this.anims.generateFrameNumbers("cobra", {
+        start: 10,
+        end: 19,
+      }),
+      frameRate: 30,
+      repeat: -1,
+    });
+
+    this.cobra.anims.play("cobra-direita");
+    this.cobra.setVelocityX(50);
+
+    this.anims.create({
+      key: "player-1-paradofrente",
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 2,
+        end: 3,
+      }),
+      frameRate: 4,
+      repeat: -1,
+    });
 
     /* Colisões por tile */
     this.plataforma.setCollisionByProperty({ collides: true });
@@ -202,6 +243,24 @@ export default class fase1 extends Phaser.Scene {
       this.player_1,
       this.plataforma,
       this.colidir_mapa,
+      null,
+      this
+    );
+
+    /* Colisão entre cobra e mapa */
+    this.physics.add.collider(
+      this.cobra,
+      this.plataforma,
+      this.cobra_plataforma,
+      null,
+      this
+    );
+
+    /* Colisão entre cobra e personagem 1 */
+    this.physics.add.collider(
+      this.player_1,
+      this.cobra,
+      this.player_cobra,
       null,
       this
     );
@@ -482,5 +541,19 @@ export default class fase1 extends Phaser.Scene {
 
   cair_na_lava() {
     this.game.scene.stop();
+  }
+
+  cobra_plataforma(cobra, plataforma) {
+    if (cobra.body.blocked.left) {
+      this.cobra.anims.play("cobra-direita");
+      this.cobra.setVelocityX(50);
+    } else if (cobra.body.blocked.right) {
+      this.cobra.anims.play("cobra-esquerda");
+      this.cobra.setVelocityX(-50);
+    }
+  }
+
+  player_cobra(jogador, cobra) {
+    this.cobra.destroy();
   }
 }
