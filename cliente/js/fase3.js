@@ -103,14 +103,14 @@ export default class fase3 extends Phaser.Scene {
 
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       this.local = "player-1";
-      this.player_1 = this.physics.add.sprite(1260, 490, this.local);
+      this.player_1 = this.physics.add.sprite(90, 392, this.local);
       this.remoto = "player-2";
-      this.player_2 = this.add.sprite(1300, 490, this.remoto);
+      this.player_2 = this.add.sprite(125, 392, this.remoto);
     } else {
       this.remoto = "player-1";
-      this.player_2 = this.add.sprite(1260, 490, this.remoto);
+      this.player_2 = this.add.sprite(90, 392, this.remoto);
       this.local = "player-2";
-      this.player_1 = this.physics.add.sprite(1300, 490, this.local);
+      this.player_1 = this.physics.add.sprite(125, 392, this.local);
     }
 
     this.anims.create({
@@ -209,43 +209,43 @@ export default class fase3 extends Phaser.Scene {
     // Animação de lista de flores laranja
     this.flores_laranja = [
       {
-        x: 180,
-        y: 550,
+        x: 241,
+        y: 320,
         objeto: undefined,
       },
       {
-        x: 700,
-        y: 510,
+        x: 1250,
+        y: 450,
         objeto: undefined,
       },
       {
-        x: 1110,
-        y: 550,
+        x: 1710,
+        y: 450,
         objeto: undefined,
       },
       {
-        x: 1040,
-        y: 390,
+        x: 2272,
+        y: 450,
         objeto: undefined,
       },
       {
-        x: 610,
-        y: 250,
+        x: 1472,
+        y: 200,
         objeto: undefined,
       },
       {
-        x: 350,
-        y: 370,
+        x: 1983,
+        y: 200,
         objeto: undefined,
       },
       {
-        x: 135,
+        x: 2460,
         y: 100,
         objeto: undefined,
       },
       {
-        x: 1000,
-        y: 130,
+        x: 2460,
+        y: 550,
         objeto: undefined,
       },
     ];
@@ -265,43 +265,38 @@ export default class fase3 extends Phaser.Scene {
     // Animação de lista de flores lilás
     this.flores_lilas = [
       {
-        x: 2380,
-        y: 550,
+        x: 560,
+        y: 320,
         objeto: undefined,
       },
       {
-        x: 1865,
-        y: 510,
+        x: 1025,
+        y: 450,
         objeto: undefined,
       },
       {
-        x: 1448,
-        y: 550,
+        x: 2030,
+        y: 450,
         objeto: undefined,
       },
       {
-        x: 1521,
-        y: 390,
+        x: 1870,
+        y: 320,
         objeto: undefined,
       },
       {
-        x: 1950,
-        y: 250,
-        objeto: undefined,
-      },
-      {
-        x: 2209,
-        y: 370,
-        objeto: undefined,
-      },
-      {
-        x: 2420,
+        x: 1630,
         y: 100,
         objeto: undefined,
       },
       {
-        x: 1560,
-        y: 130,
+        x: 2272,
+        y: 200,
+        objeto: undefined,
+      },
+      {
+        x: 2465,
+        y: 420,
         objeto: undefined,
       },
     ];

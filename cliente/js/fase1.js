@@ -33,7 +33,7 @@ export default class fase1 extends Phaser.Scene {
 
     // Objetos
 
-    this.load.image("flor-lilas", "./assets/objeto/flor-lilas.png");
+    this.load.image("flor-lilas", "./assets/objeto/flor-lilas.pCOBRAng");
 
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
