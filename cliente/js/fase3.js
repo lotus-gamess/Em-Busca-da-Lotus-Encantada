@@ -114,7 +114,7 @@ export default class fase3 extends Phaser.Scene {
     }
 
     this.anims.create({
-      key: "player-1-paradocostas",
+      key: "player-1-paradofrente",
       frames: this.anims.generateFrameNumbers(this.local, {
         start: 0,
         end: 1,
@@ -124,7 +124,7 @@ export default class fase3 extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: "player-1-paradofrente",
+      key: "player-1-paradocostas",
       frames: this.anims.generateFrameNumbers(this.local, {
         start: 2,
         end: 3,

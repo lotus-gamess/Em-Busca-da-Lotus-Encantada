@@ -1,5 +1,4 @@
 import config from "./config.js";
-
 import abertura from "./cena-abertura.js";
 import sala from "./cena-sala.js";
 import fase1 from "./fase1.js";
