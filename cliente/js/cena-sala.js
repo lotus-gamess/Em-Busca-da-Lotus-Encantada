@@ -10,8 +10,8 @@ export default class sala extends Phaser.Scene {
 
   create() {
     this.imagem = this.add.image(400, 225, "abertura").setTint(0x666666);
-    this.grade = this.add.tileSprite(400, 225, 600, 300, "grade");
-    this.mensagem = this.add.text(100, 75, "Escolha uma sala para entrar:", {
+    this.grade = this.add.tileSprite(400, 225, 600, 350, "grade");
+    this.mensagem = this.add.text(100, 75, "       Escolha uma sala:", {
       fontFamily: "monospace",
       font: "32px Courier",
       fill: "#cccccc",
@@ -101,7 +101,7 @@ export default class sala extends Phaser.Scene {
       if (jogadores.segundo) {
         this.mensagem.destroy();
         this.game.jogadores = jogadores;
-        this.game.scene.start("fase2");
+        this.game.scene.start("fase1");
       } else if (jogadores.primeiro) {
         this.grade.destroy();
         this.imagem.destroy();

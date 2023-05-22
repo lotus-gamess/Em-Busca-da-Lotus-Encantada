@@ -27,13 +27,13 @@ export default class fase1 extends Phaser.Scene {
 
     // Inimigos
     this.load.spritesheet("cobra", "./assets/cobra/cobra.png", {
-      frameWidth: 64,
-      frameHeight: 48,
+      frameWidth: 13,
+      frameHeight: 13,
     });
 
     // Objetos
 
-    this.load.image("flor-lilas", "./assets/objeto/flor-lilas.pCOBRAng");
+    this.load.image("flor-lilas", "./assets/objeto/flor-lilas.png");
 
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
@@ -438,7 +438,7 @@ export default class fase1 extends Phaser.Scene {
     // Botões //
 
     this.cima = this.add
-      .sprite(700, 360, "cima", 0)
+      .sprite(700, 365, "cima", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.cima.setFrame(1);
@@ -453,7 +453,7 @@ export default class fase1 extends Phaser.Scene {
       .setScrollFactor(0);
 
     this.esquerda = this.add
-      .sprite(665, 400, "esquerda", 0)
+      .sprite(658, 410, "esquerda", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.esquerda.setFrame(1);
@@ -468,7 +468,7 @@ export default class fase1 extends Phaser.Scene {
       .setScrollFactor(0);
 
     this.direita = this.add
-      .sprite(735, 400, "direita", 0)
+      .sprite(742, 410, "direita", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.direita.setFrame(1);
@@ -509,6 +509,38 @@ export default class fase1 extends Phaser.Scene {
       this.player_2.x = x + 24;
       this.player_2.y = y + 24;
     });
+
+    this.game.socket.on("artefatos-notificar", (artefatos) => {
+      if (artefatos.laranja) {
+        for (let i = 0; i < artefatos.laranja.length; i++) {
+          if (artefatos.laranja[i]) {
+            this.flores_laranja[i].objeto.enableBody(
+              false,
+              this.flores_laranja[i].x,
+              this.flores_laranja[i].y,
+              true,
+              true
+            );
+          } else {
+            this.flores_laranja[i].objeto.disableBody(true, true);
+          }
+        }
+      } else if (artefatos.lilas) {
+        for (let i = 0; i < artefatos.lilas.length; i++) {
+          if (artefatos.lilas[i]) {
+            this.flores_lilas[i].objeto.enableBody(
+              false,
+              this.flores_lilas[i].x,
+              this.flores_lilas[i].y,
+              true,
+              true
+            );
+          } else {
+            this.flores_lilas[i].objeto.disableBody(true, true);
+          }
+        }
+      }
+    });
   }
 
   update() {
@@ -529,6 +561,9 @@ export default class fase1 extends Phaser.Scene {
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
+      this.game.socket.emit("artefatos-publicar", this.game.sala, {
+        laranja: this.flores_laranja.map((flor) => flor.objeto.visible),
+      });
     }
   }
 
@@ -536,6 +571,9 @@ export default class fase1 extends Phaser.Scene {
     if (this.game.jogadores.segundo === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
+      this.game.socket.emit("artefatos-publicar", this.game.sala, {
+        lilas: this.flores_lilas.map((flor) => flor.objeto.visible),
+      });
     }
   }
 

@@ -575,8 +575,40 @@ export default class fase3 extends Phaser.Scene {
       this.player_2.x = x + 24;
       this.player_2.y = y + 24;
     });
-  }
 
+    this.game.socket.on("artefatos-notificar", (artefatos) => {
+      if (artefatos.laranja) {
+        for (let i = 0; i < artefatos.laranja.length; i++) {
+          if (artefatos.laranja[i]) {
+            this.flores_laranja[i].objeto.enableBody(
+              false,
+              this.flores_laranja[i].x,
+              this.flores_laranja[i].y,
+              true,
+              true
+            );
+          } else {
+            this.flores_laranja[i].objeto.disableBody(true, true);
+          }
+        }
+      } else if (artefatos.lilas) {
+        for (let i = 0; i < artefatos.lilas.length; i++) {
+          if (artefatos.lilas[i]) {
+            this.flores_lilas[i].objeto.enableBody(
+              false,
+              this.flores_lilas[i].x,
+              this.flores_lilas[i].y,
+              true,
+              true
+            );
+          } else {
+            this.flores_lilas[i].objeto.disableBody(true, true);
+          }
+        }
+      }
+    });
+  }
+  
   update() {
     let frame;
     try {
@@ -595,6 +627,11 @@ export default class fase3 extends Phaser.Scene {
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
+      this.game.socket.emit(
+        "artefatos-publicar",
+        this.game.sala,
+        { laranja: this.flores_laranja.map((flor) => flor.objeto.visible) } 
+      );
     }
   }
 
@@ -602,6 +639,11 @@ export default class fase3 extends Phaser.Scene {
     if (this.game.jogadores.segundo === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
+      this.game.socket.emit(
+        "artefatos-publicar",
+        this.game.sala,
+        { lilas: this.flores_lilas.map((flor) => flor.objeto.visible) } 
+      );
     }
   }
 
