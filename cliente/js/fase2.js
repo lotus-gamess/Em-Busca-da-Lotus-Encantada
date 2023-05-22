@@ -594,7 +594,7 @@ export default class fase2 extends Phaser.Scene {
       this.game.socket.emit(
         "artefatos-publicar",
         this.game.sala,
-        { laranja: this.flores_laranja.map((flor) => flor.objeto.visible) } // {laranja: [false, true, true]}
+        { laranja: this.flores_laranja.map((flor) => flor.objeto.visible) } 
       );
     }
   }
@@ -606,7 +606,7 @@ export default class fase2 extends Phaser.Scene {
       this.game.socket.emit(
         "artefatos-publicar",
         this.game.sala,
-        { lilas: this.flores_lilas.map((flor) => flor.objeto.visible) } // {lilas: [false, true, true]}
+        { lilas: this.flores_lilas.map((flor) => flor.objeto.visible) } 
       );
     }
   }
