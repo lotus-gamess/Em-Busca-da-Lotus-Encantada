@@ -9,7 +9,20 @@ import fase3 from "./fase3.js";
 
 class Game extends Phaser.Game {
   constructor() {
+
     super(config);
+      
+      /* Lista de servidor(es) ICE */
+    this.ice_servers = {
+      iceServers: [
+        {
+          urls: "stun:stun.l.google.com:19302",
+        },
+      ],
+    };
+
+    /* Associação de objeto HTML de áudio e objeto JS */
+    this.audio = document.querySelector("audio");
 
     this.socket = io();
     this.socket.on("connect", () => {
