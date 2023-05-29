@@ -36,6 +36,11 @@ export default class fase1 extends Phaser.Scene {
       frameHeight: 30,
     });
 
+    this.load.spritesheet("porta", "./assets/mapa1/porta.png", {
+      frameWidth: 100,
+      frameHeight: 158,
+    });
+
     // Botões
 
     this.load.spritesheet("cima", "./assets/botao/cima.png", {
@@ -100,6 +105,10 @@ export default class fase1 extends Phaser.Scene {
     );
 
     // Player 1
+
+    this.porta = this.physics.add.sprite(300, 540, "porta");
+    this.porta.body.setAllowGravity(false);
+    this.porta.body.setImmovable(true);
 
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       this.local = "player-1";
@@ -588,6 +597,13 @@ export default class fase1 extends Phaser.Scene {
         }
       }
     });
+
+    //this.physics.add.overlap(
+    //  this.player_1,
+    //  this.porta,
+    //  null,
+    //  this
+    //);
   }
 
   update() {

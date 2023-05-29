@@ -9,10 +9,16 @@ import fase3 from "./fase3.js";
 
 class Game extends Phaser.Game {
   constructor() {
-
     super(config);
-      
-      /* Lista de servidor(es) ICE */
+
+    /* Estabelecimento de canal bidirecional via WebSocket e/ou polling */
+    this.socket = io();
+    //this.socket = io.connect({path: "/adcipt20231/socket.io"});
+    this.socket.on("connect", () => {
+      console.log("Conectado ao servidor para troca de mensagens.");
+    });
+
+    /* Lista de servidor(es) ICE */
     this.ice_servers = {
       iceServers: [
         {
