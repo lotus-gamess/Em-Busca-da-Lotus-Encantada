@@ -31,6 +31,8 @@ export default class fase1 extends Phaser.Scene {
 
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
+    this.load.image("gameover", "./assets/gameover/gameover.png");
+
     this.load.spritesheet("lava", "./assets/objeto/lava.png", {
       frameWidth: 40,
       frameHeight: 30,
@@ -38,7 +40,7 @@ export default class fase1 extends Phaser.Scene {
 
     this.load.spritesheet("porta", "./assets/mapa1/porta.png", {
       frameWidth: 100,
-      frameHeight: 158,
+      frameHeight: 120,
     });
 
     // Botões
@@ -106,7 +108,7 @@ export default class fase1 extends Phaser.Scene {
 
     // Player 1
 
-    this.porta = this.physics.add.sprite(300, 540, "porta");
+    this.porta = this.physics.add.sprite(2142, 422, "porta");
     this.porta.body.setAllowGravity(false);
     this.porta.body.setImmovable(true);
 
