@@ -4,33 +4,41 @@ import sala from "./cena-sala.js";
 import fase1 from "./fase1.js";
 import fase2 from "./fase2.js";
 import fase3 from "./fase3.js";
-// import game_over from "./cena-game-over.js";
-// import fim_feliz from "./cena-fim-feliz.js";
+import gameover from "./gameover.js";
+import fimfeliz from "./fimfeliz.js";
 
 class Game extends Phaser.Game {
   constructor() {
     super(config);
 
-    /* Estabelecimento de canal bidirecional via WebSocket e/ou polling */
-    this.socket = io();
-    //this.socket = io.connect({path: "/adcipt20231/socket.io"});
-    this.socket.on("connect", () => {
-      console.log("Conectado ao servidor para troca de mensagens.");
-    });
+    let iceServers;
+    if (window.location.host === "ifsc.digital") {
+      this.socket = io.connect({
+        path: "/Em-busca-das-flores-magicas/socket.io/",
+      });
 
-    /* Lista de servidor(es) ICE */
-    this.ice_servers = {
-      iceServers: [
+      iceServers = [
+        {
+          urls: "stun:ifsc.digital",
+        },
+        {
+          urls: "turns:ifsc.digital",
+          username: "Em-busca-das-flores-magicas",
+          credential: "Em-busca-das-flores-magicas",
+        },
+      ];
+    } else {
+      this.socket = io();
+
+      iceServers = [
         {
           urls: "stun:stun.l.google.com:19302",
         },
-      ],
-    };
-
-    /* Associação de objeto HTML de áudio e objeto JS */
+      ];
+    }
+    this.ice_servers = { iceServers };
     this.audio = document.querySelector("audio");
 
-    this.socket = io();
     this.socket.on("connect", () => {
       console.log("Conectado ao servidor para troca de mensagens.");
     });
@@ -40,8 +48,8 @@ class Game extends Phaser.Game {
     this.scene.add("fase1", fase1);
     this.scene.add("fase2", fase2);
     this.scene.add("fase3", fase3);
-    //this.scene.add("encerramento", game_over);
-    //this.scene.add("encerramento", fim_feliz);
+    this.scene.add("gameover", gameover);
+    this.scene.add("fimfeliz", fimfeliz);
 
     this.scene.start("abertura");
   }

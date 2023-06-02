@@ -1,15 +1,15 @@
-export default class final_feliz extends Phaser.Scene {
+export default class fimfeliz extends Phaser.Scene {
   constructor() {
-    super("fim-feliz");
+    super("fimfeliz");
   }
 
   preload() {
-    this.load.image("ifsc-sj-2014", "./assets/ifsc-sj-2014.png");
+    this.load.image("fimfeliz", "./assets/final/fimfeliz.png");
   }
 
   create() {
     this.imagem = this.add
-      .image(400, 225, "ifsc-sj-2014")
+      .image(800, 450, "fimfeliz")
       .setTint(0xffff00)
       .setInteractive()
       .on("pointerdown", () => {
@@ -17,10 +17,6 @@ export default class final_feliz extends Phaser.Scene {
         this.texto.destroy();
         this.game.scene.start("abertura");
       });
-
-    this.texto = this.add.text(490, 50, "Fim feliz!", {
-      fill: "#000000",
-    });
   }
 
   upload() {}

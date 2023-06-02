@@ -4,7 +4,7 @@ export default class fim_do_jogo extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("gameover", "./assets/gameover/gameover.png");
+    this.load.image("gameover", "./asset/fim/gameover.png");
   }
 
   create() {

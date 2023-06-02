@@ -31,9 +31,16 @@ export default class fase3 extends Phaser.Scene {
 
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
+    this.load.image("gameover", "./assets/gameover/gameover.png");
+
     this.load.spritesheet("lava", "./assets/objeto/lava.png", {
       frameWidth: 40,
       frameHeight: 30,
+    });
+
+    this.load.spritesheet("porta", "./assets/mapa3/porta.png", {
+      frameWidth: 100,
+      frameHeight: 120,
     });
 
     // Botões
@@ -67,6 +74,9 @@ export default class fase3 extends Phaser.Scene {
   }
 
   create() {
+    this.flores_laranja_coletadas = 0;
+    this.flores_lilas_coletadas = 0;
+
     // Trilha sonora
     this.trilha = this.sound.add("fairy-tale");
     this.trilha.play();
@@ -100,6 +110,10 @@ export default class fase3 extends Phaser.Scene {
     );
 
     // Player 1
+
+    this.porta = this.physics.add.sprite(1024, 168, "porta", 0);
+    this.porta.body.setAllowGravity(false);
+    this.porta.body.setImmovable(true);
 
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       this.local = "player-1";
@@ -212,7 +226,7 @@ export default class fase3 extends Phaser.Scene {
         x: 241,
         y: 320,
         objeto: undefined,
-      },
+      },/*
       {
         x: 1250,
         y: 450,
@@ -247,7 +261,7 @@ export default class fase3 extends Phaser.Scene {
         x: 2460,
         y: 550,
         objeto: undefined,
-      },
+      },*/
     ];
     this.flores_laranja.forEach((item) => {
       item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
@@ -268,7 +282,7 @@ export default class fase3 extends Phaser.Scene {
         x: 560,
         y: 320,
         objeto: undefined,
-      },
+      },/*
       {
         x: 1025,
         y: 450,
@@ -298,7 +312,7 @@ export default class fase3 extends Phaser.Scene {
         x: 2465,
         y: 420,
         objeto: undefined,
-      },
+      },*/
     ];
     this.flores_lilas.forEach((item) => {
       item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas");
@@ -504,7 +518,7 @@ export default class fase3 extends Phaser.Scene {
     // Botões //
 
     this.cima = this.add
-      .sprite(700, 360, "cima", 0)
+      .sprite(700, 365, "cima", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.cima.setFrame(1);
@@ -519,7 +533,7 @@ export default class fase3 extends Phaser.Scene {
       .setScrollFactor(0);
 
     this.esquerda = this.add
-      .sprite(665, 400, "esquerda", 0)
+      .sprite(658, 410, "esquerda", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.esquerda.setFrame(1);
@@ -534,7 +548,7 @@ export default class fase3 extends Phaser.Scene {
       .setScrollFactor(0);
 
     this.direita = this.add
-      .sprite(735, 400, "direita", 0)
+      .sprite(742, 410, "direita", 0)
       .setInteractive()
       .on("pointerover", () => {
         this.direita.setFrame(1);
@@ -577,6 +591,7 @@ export default class fase3 extends Phaser.Scene {
     });
 
     this.game.socket.on("artefatos-notificar", (artefatos) => {
+      let coletadas = 0;
       if (artefatos.laranja) {
         for (let i = 0; i < artefatos.laranja.length; i++) {
           if (artefatos.laranja[i]) {
@@ -589,8 +604,10 @@ export default class fase3 extends Phaser.Scene {
             );
           } else {
             this.flores_laranja[i].objeto.disableBody(true, true);
+            coletadas += 1;
           }
         }
+        this.flores_laranja_coletadas = coletadas;
       } else if (artefatos.lilas) {
         for (let i = 0; i < artefatos.lilas.length; i++) {
           if (artefatos.lilas[i]) {
@@ -603,35 +620,54 @@ export default class fase3 extends Phaser.Scene {
             );
           } else {
             this.flores_lilas[i].objeto.disableBody(true, true);
+            coletadas += 1;
           }
         }
+        this.flores_lilas_coletadas = coletadas;
+      }
+
+      if (
+        this.flores_laranja_coletadas === this.flores_laranja.length &&
+        this.flores_lilas_coletadas === this.flores_lilas.length
+      ) {
+        this.porta.setFrame(1);
+        this.physics.add.collider(
+          this.player_1,
+          this.porta,
+          this.passar_de_fase,
+          null,
+          this
+        );
       }
     });
-  }
-  
-  update() {
-    let frame;
-    try {
-      frame = this.player_1.anims.getFrameName();
-    } catch (e) {
-      frame = 0;
-    }
-    this.game.socket.emit("estado-publicar", this.game.sala, {
-      frame: frame,
-      x: this.player_1.body.x,
-      y: this.player_1.body.y,
+
+    this.game.socket.on("cena-notificar", (cena) => {
+      this.game.scene.stop("fase3");
+      this.game.scene.start(cena);
     });
+  }
+
+  update() {
+    try {
+      this.game.socket.emit("estado-publicar", this.game.sala, {
+        frame: this.player_1.anims.getFrameName(),
+        x: this.player_1.body.x,
+        y: this.player_1.body.y,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    console.log(this.flores_laranja_coletadas, this.flores_lilas_coletadas);
   }
 
   pegar_flor_laranja(jogador, flor) {
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
-      this.game.socket.emit(
-        "artefatos-publicar",
-        this.game.sala,
-        { laranja: this.flores_laranja.map((flor) => flor.objeto.visible) } 
-      );
+      this.game.socket.emit("artefatos-publicar", this.game.sala, {
+        laranja: this.flores_laranja.map((flor) => flor.objeto.visible),
+      });
+      this.flores_laranja_coletadas += 1;
     }
   }
 
@@ -639,15 +675,20 @@ export default class fase3 extends Phaser.Scene {
     if (this.game.jogadores.segundo === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
-      this.game.socket.emit(
-        "artefatos-publicar",
-        this.game.sala,
-        { lilas: this.flores_lilas.map((flor) => flor.objeto.visible) } 
-      );
+      this.game.socket.emit("artefatos-publicar", this.game.sala, {
+        lilas: this.flores_lilas.map((flor) => flor.objeto.visible),
+      });
+      this.flores_lilas_coletadas += 1;
     }
   }
 
   cair_na_lava() {
     this.game.scene.stop();
+  }
+
+  passar_de_fase(jogador, porta) {
+    this.game.scene.stop("fase3");
+    this.game.scene.start("fimfeliz");
+    this.game.socket.emit("cena-publicar", this.game.sala, "fimfeliz");
   }
 }
