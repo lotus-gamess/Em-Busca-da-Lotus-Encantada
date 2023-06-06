@@ -31,6 +31,8 @@ export default class fase2 extends Phaser.Scene {
 
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
+    this.load.image("gameover", "./assets/fim/gameover.png");
+
     this.load.spritesheet("lava", "./assets/objeto/lava.png", {
       frameWidth: 40,
       frameHeight: 30,
@@ -204,7 +206,16 @@ export default class fase2 extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-    //
+
+    this.anims.create({
+      key: "player-1-paradofrente",
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 2,
+        end: 3,
+      }),
+      frameRate: 4,
+      repeat: -1,
+    });
 
     /* Colisões por tile */
     this.plataforma.setCollisionByProperty({ collides: true });
@@ -590,7 +601,7 @@ export default class fase2 extends Phaser.Scene {
     });
 
     this.game.socket.on("cena-notificar", (cena) => {
-      this.game.scene.stop("fase2");
+      this.game.scene.stop("fase1");
       this.game.scene.start(cena);
     });
   }
@@ -616,6 +627,20 @@ export default class fase2 extends Phaser.Scene {
         laranja: this.flores_laranja.map((flor) => flor.objeto.visible),
       });
       this.flores_laranja_coletadas += 1;
+
+      if (
+        this.flores_laranja_coletadas === this.flores_laranja.length &&
+        this.flores_lilas_coletadas === this.flores_lilas.length
+      ) {
+        this.porta.setFrame(1);
+        this.physics.add.collider(
+          this.player_1,
+          this.porta,
+          this.passar_de_fase,
+          null,
+          this
+        );
+      }
     }
   }
 
@@ -627,6 +652,20 @@ export default class fase2 extends Phaser.Scene {
         lilas: this.flores_lilas.map((flor) => flor.objeto.visible),
       });
       this.flores_lilas_coletadas += 1;
+
+      if (
+        this.flores_laranja_coletadas === this.flores_laranja.length &&
+        this.flores_lilas_coletadas === this.flores_lilas.length
+      ) {
+        this.porta.setFrame(1);
+        this.physics.add.collider(
+          this.player_1,
+          this.porta,
+          this.passar_de_fase,
+          null,
+          this
+        );
+      }
     }
   }
 

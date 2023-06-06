@@ -4,20 +4,18 @@ export default class fimfeliz extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("fimfeliz", "./assets/final/fimfeliz.png");
+    // Tela final feliz
+    this.load.image("fimfeliz", "./assets/fim/fimfeliz.png");
   }
 
   create() {
     this.imagem = this.add
-      .image(800, 450, "fimfeliz")
-      .setTint(0xffff00)
+      .image(400, 225, "fimfeliz")
       .setInteractive()
       .on("pointerdown", () => {
         this.imagem.destroy();
-        this.texto.destroy();
         this.game.scene.start("abertura");
       });
   }
-
   upload() {}
 }

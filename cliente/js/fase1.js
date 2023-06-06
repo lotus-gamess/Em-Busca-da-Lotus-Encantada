@@ -31,7 +31,7 @@ export default class fase1 extends Phaser.Scene {
 
     this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
 
-    this.load.image("gameover", "./assets/gameover/gameover.png");
+    this.load.image("gameover", "./assets/fim/gameover.png");
 
     this.load.spritesheet("lava", "./assets/objeto/lava.png", {
       frameWidth: 40,
@@ -333,7 +333,7 @@ export default class fase1 extends Phaser.Scene {
         y: 340,
         objeto: undefined,
       },
-     /* {
+      /* {
         x: 90,
         y: 240,
         objeto: undefined,
@@ -389,7 +389,7 @@ export default class fase1 extends Phaser.Scene {
         y: 550,
         objeto: undefined,
       },
-     /* {
+      /* {
         x: 1540,
         y: 550,
         objeto: undefined,
@@ -649,6 +649,20 @@ export default class fase1 extends Phaser.Scene {
         laranja: this.flores_laranja.map((flor) => flor.objeto.visible),
       });
       this.flores_laranja_coletadas += 1;
+
+      if (
+        this.flores_laranja_coletadas === this.flores_laranja.length &&
+        this.flores_lilas_coletadas === this.flores_lilas.length
+      ) {
+        this.porta.setFrame(1);
+        this.physics.add.collider(
+          this.player_1,
+          this.porta,
+          this.passar_de_fase,
+          null,
+          this
+        );
+      }
     }
   }
 
@@ -660,6 +674,20 @@ export default class fase1 extends Phaser.Scene {
         lilas: this.flores_lilas.map((flor) => flor.objeto.visible),
       });
       this.flores_lilas_coletadas += 1;
+
+      if (
+        this.flores_laranja_coletadas === this.flores_laranja.length &&
+        this.flores_lilas_coletadas === this.flores_lilas.length
+      ) {
+        this.porta.setFrame(1);
+        this.physics.add.collider(
+          this.player_1,
+          this.porta,
+          this.passar_de_fase,
+          null,
+          this
+        );
+      }
     }
   }
 
