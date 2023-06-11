@@ -16,7 +16,7 @@ export default class sala extends Phaser.Scene {
     this.load.image("sala8", "./assets/botao-sala/sala8.png");
     this.load.image("sala9", "./assets/botao-sala/sala9.png");
     this.load.image("sala10", "./assets/botao-sala/sala10.png");
-    
+
   }
 
   create() {
@@ -132,7 +132,6 @@ export default class sala extends Phaser.Scene {
         navigator.mediaDevices
           .getUserMedia({ video: false, audio: true })
           .then((stream) => {
-            console.log(stream);
             this.game.midias = stream;
           })
           .catch((error) => console.log(error));
@@ -140,5 +139,5 @@ export default class sala extends Phaser.Scene {
     });
   }
 
-  upload() {}
+  update() { }
 }

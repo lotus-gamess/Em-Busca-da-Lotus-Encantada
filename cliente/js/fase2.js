@@ -601,7 +601,7 @@ export default class fase2 extends Phaser.Scene {
     });
 
     this.game.socket.on("cena-notificar", (cena) => {
-      this.game.scene.stop("fase1");
+      this.game.scene.stop("fase2");
       this.game.scene.start(cena);
     });
   }
@@ -616,7 +616,6 @@ export default class fase2 extends Phaser.Scene {
     } catch (e) {
       console.log(e);
     }
-    console.log(this.flores_laranja_coletadas, this.flores_lilas_coletadas);
   }
 
   pegar_flor_laranja(jogador, flor) {
@@ -673,7 +672,7 @@ export default class fase2 extends Phaser.Scene {
     this.game.scene.stop();
   }
 
-  passar_de_fase(jogador, porta) {
+  passar_de_fase() {
     this.game.scene.stop("fase2");
     this.game.scene.start("fase3");
     this.game.socket.emit("cena-publicar", this.game.sala, "fase3");
