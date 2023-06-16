@@ -5,6 +5,8 @@ import fase1 from "./fase1.js";
 import fase2 from "./fase2.js";
 import fase3 from "./fase3.js";
 import gameover from "./gameover.js";
+import gameover2 from "./gameover2.js";
+import gameover3 from "./gameover3.js";
 import fimfeliz from "./fimfeliz.js";
 
 class Game extends Phaser.Game {
@@ -49,6 +51,8 @@ class Game extends Phaser.Game {
     this.scene.add("fase2", fase2);
     this.scene.add("fase3", fase3);
     this.scene.add("gameover", gameover);
+    this.scene.add("gameover2", gameover2);
+    this.scene.add("gameover3", gameover3);
     this.scene.add("fimfeliz", fimfeliz);
 
     this.scene.start("abertura");

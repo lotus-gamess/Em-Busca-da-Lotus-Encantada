@@ -38,7 +38,7 @@ export default class fase3 extends Phaser.Scene {
       frameHeight: 30,
     });
 
-    this.load.spritesheet("porta", "./assets/mapa3/porta.png", {
+    this.load.spritesheet("porta3", "./assets/mapa3/porta3.png", {
       frameWidth: 100,
       frameHeight: 120,
     });
@@ -111,7 +111,7 @@ export default class fase3 extends Phaser.Scene {
 
     // Player 1
 
-    this.porta = this.physics.add.sprite(1024, 168, "porta", 0);
+    this.porta = this.physics.add.sprite(1024, 168, "porta3", 0);
     this.porta.body.setAllowGravity(false);
     this.porta.body.setImmovable(true);
 
@@ -711,7 +711,9 @@ export default class fase3 extends Phaser.Scene {
   }
 
   cair_na_lava() {
-    this.game.scene.stop();
+    this.game.scene.stop("fase3");
+    this.game.scene.start("gameover3");
+    this.game.socket.emit("cena-publicar", this.game.sala, "gameover3");
   }
 
   passar_de_fase(jogador, porta) {

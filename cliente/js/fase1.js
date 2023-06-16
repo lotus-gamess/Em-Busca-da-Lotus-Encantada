@@ -688,11 +688,14 @@ export default class fase1 extends Phaser.Scene {
   }
 
   cair_na_lava() {
-    this.game.scene.stop();
+    this.game.scene.stop("fase1");
+    this.game.scene.start("gameover");
+    this.game.socket.emit("cena-publicar", this.game.sala, "gameover");
   }
 
   passar_de_fase() {
     this.game.scene.stop("fase1");
+    this.game.scene.destroy("fase1");
     this.game.scene.start("fase2");
     this.game.socket.emit("cena-publicar", this.game.sala, "fase2");
   }

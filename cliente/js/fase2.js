@@ -27,9 +27,9 @@ export default class fase2 extends Phaser.Scene {
 
     // Objetos
 
-    this.load.image("flor-lilas", "./assets/objeto/flor-lilas.png");
+    this.load.image("flor-lilas2", "./assets/mapa2/flor-lilas2.png");
 
-    this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
+    this.load.image("flor-laranja2", "./assets/mapa2/flor-laranja2.png");
 
     this.load.image("gameover", "./assets/fim/gameover.png");
 
@@ -38,7 +38,7 @@ export default class fase2 extends Phaser.Scene {
       frameHeight: 30,
     });
 
-    this.load.spritesheet("porta", "./assets/mapa2/porta.png", {
+    this.load.spritesheet("porta2", "./assets/mapa2/porta2.png", {
       frameWidth: 100,
       frameHeight: 120,
     });
@@ -111,7 +111,7 @@ export default class fase2 extends Phaser.Scene {
 
     // Player 1
 
-    this.porta = this.physics.add.sprite(1280, 130, "porta", 0);
+    this.porta = this.physics.add.sprite(1280, 130, "porta2", 0);
     this.porta.body.setAllowGravity(false);
     this.porta.body.setImmovable(true);
 
@@ -273,7 +273,7 @@ export default class fase2 extends Phaser.Scene {
       },
     ];
     this.flores_laranja.forEach((item) => {
-      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja2");
       item.objeto.body.setAllowGravity(false);
       item.objeto.body.setImmovable();
       this.physics.add.overlap(
@@ -329,7 +329,7 @@ export default class fase2 extends Phaser.Scene {
       },
     ];
     this.flores_lilas.forEach((item) => {
-      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas");
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas2");
       item.objeto.body.setAllowGravity(false);
       item.objeto.body.setImmovable();
       this.physics.add.overlap(
@@ -669,7 +669,9 @@ export default class fase2 extends Phaser.Scene {
   }
 
   cair_na_lava() {
-    this.game.scene.stop();
+    this.game.scene.stop("fase2");
+    this.game.scene.start("gameover2");
+    this.game.socket.emit("cena-publicar", this.game.sala, "gameover2");
   }
 
   passar_de_fase() {
