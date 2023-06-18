@@ -32,17 +32,20 @@ io.on("connection", (socket) => {
     io.to(sala).emit("jogadores", jogadores);
   });
 
-  socket.on("estado-publicar", (sala, estado) => {
-    socket.broadcast.to(sala).emit("estado-notificar", estado);
+  socket.on("disconnect", () => {});
+
+  /* Fase 1 */
+  socket.on("estado-publicar-fase1", (sala, estado) => {
+    socket.broadcast.to(sala).emit("estado-notificar-fase1", estado);
   });
 
-  socket.on("artefatos-publicar", (sala, artefatos) => {
-    socket.broadcast.to(sala).emit("artefatos-notificar", artefatos);
+  socket.on("artefatos-publicar-fase1", (sala, artefatos) => {
+    socket.broadcast.to(sala).emit("artefatos-notificar-fase1", artefatos);
   });
 
-  socket.on("cena-publicar", (sala, cena) => {
-    socket.broadcast.to(sala).emit("cena-notificar", cena);
-  });  
+  socket.on("cena-publicar-fase1", (sala, cena) => {
+    socket.broadcast.to(sala).emit("cena-notificar-fase1", cena);
+  });
 
   socket.on("offer", (sala, description) => {
     socket.broadcast.to(sala).emit("offer", description);
@@ -56,7 +59,18 @@ io.on("connection", (socket) => {
     socket.broadcast.to(sala).emit("answer", description);
   });
 
-  socket.on("disconnect", () => {});
+  /* Fase 2 */
+  socket.on("estado-publicar-fase2", (sala, estado) => {
+    socket.broadcast.to(sala).emit("estado-notificar-fase2", estado);
+  });
+
+  socket.on("artefatos-publicar-fase2", (sala, artefatos) => {
+    socket.broadcast.to(sala).emit("artefatos-notificar-fase2", artefatos);
+  });
+
+  socket.on("cena-publicar-fase2", (sala, cena) => {
+    socket.broadcast.to(sala).emit("cena-notificar-fase2", cena);
+  });
 });
 
 app.use(express.static("../cliente/"));
