@@ -27,9 +27,9 @@ export default class fase3 extends Phaser.Scene {
 
     // Objetos
 
-    this.load.image("flor-lilas", "./assets/objeto/flor-lilas.png");
+    this.load.image("flor-lilas", "./assets/mapa3/flor-lilas3.png");
 
-    this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
+    this.load.image("flor-laranja", "./assets/mapa3/flor-laranja3.png");
 
     this.load.image("gameover", "./assets/fim/gameover.png");
 
@@ -75,6 +75,7 @@ export default class fase3 extends Phaser.Scene {
 
     // Trilha sonora
     this.trilha = this.sound.add("fairy-tale");
+    this.trilha.loop = true;
     this.trilha.play();
 
     // Efeito sonoro
@@ -202,7 +203,16 @@ export default class fase3 extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-    //
+
+    this.anims.create({
+      key: "player-1-paradofrente",
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 2,
+        end: 3,
+      }),
+      frameRate: 4,
+      repeat: -1,
+    });
 
     /* Colisões por tile */
     this.plataforma.setCollisionByProperty({ collides: true });
@@ -580,13 +590,13 @@ export default class fase3 extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 2496, 640);
     this.cameras.main.startFollow(this.player_1);
 
-    this.game.socket.on("estado-notificar", ({ frame, x, y }) => {
+    this.game.socket.on("estado-notificar-fase3", ({ frame, x, y }) => {
       this.player_2.setFrame(frame);
       this.player_2.x = x + 24;
       this.player_2.y = y + 24;
     });
 
-    this.game.socket.on("artefatos-notificar", (artefatos) => {
+    this.game.socket.on("artefatos-notificar-fase3", (artefatos) => {
       let coletadas = 0;
       if (artefatos.laranja) {
         for (let i = 0; i < artefatos.laranja.length; i++) {
@@ -637,15 +647,15 @@ export default class fase3 extends Phaser.Scene {
       }
     });
 
-    this.game.socket.on("cena-notificar", (cena) => {
-      this.game.scene.stop("fase1");
+    this.game.socket.on("cena-notificar-fase3", (cena) => {
+      this.game.scene.stop("fase3");
       this.game.scene.start(cena);
     });
   }
 
   update() {
     try {
-      this.game.socket.emit("estado-publicar", this.game.sala, {
+      this.game.socket.emit("estado-publicar-fase3", this.game.sala, {
         frame: this.player_1.anims.getFrameName(),
         x: this.player_1.body.x,
         y: this.player_1.body.y,
@@ -653,14 +663,13 @@ export default class fase3 extends Phaser.Scene {
     } catch (e) {
       console.log(e);
     }
-    console.log(this.flores_laranja_coletadas, this.flores_lilas_coletadas);
   }
 
   pegar_flor_laranja(jogador, flor) {
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
-      this.game.socket.emit("artefatos-publicar", this.game.sala, {
+      this.game.socket.emit("artefatos-publicar-fase3", this.game.sala, {
         laranja: this.flores_laranja.map((flor) => flor.objeto.visible),
       });
       this.flores_laranja_coletadas += 1;
@@ -685,7 +694,7 @@ export default class fase3 extends Phaser.Scene {
     if (this.game.jogadores.segundo === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
-      this.game.socket.emit("artefatos-publicar", this.game.sala, {
+      this.game.socket.emit("artefatos-publicar-fase3", this.game.sala, {
         lilas: this.flores_lilas.map((flor) => flor.objeto.visible),
       });
       this.flores_lilas_coletadas += 1;
@@ -709,12 +718,12 @@ export default class fase3 extends Phaser.Scene {
   cair_na_lava() {
     this.game.scene.stop("fase3");
     this.game.scene.start("gameover3");
-    this.game.socket.emit("cena-publicar", this.game.sala, "gameover3");
+    this.game.socket.emit("cena-publicar-fase3", this.game.sala, "gameover3");
   }
 
-  passar_de_fase(jogador, porta) {
+  passar_de_fase() {
+    this.game.socket.emit("cena-publicar-fase3", this.game.sala, "fimfeliz");
     this.game.scene.stop("fase3");
     this.game.scene.start("fimfeliz");
-    this.game.socket.emit("cena-publicar", this.game.sala, "fimfeliz");
   }
 }

@@ -27,9 +27,9 @@ export default class fase2 extends Phaser.Scene {
 
     // Objetos
 
-    this.load.image("flor-lilas", "./assets/mapa2/flor-lilas2.png");
+    this.load.image("flor-lilas2", "./assets/mapa2/flor-lilas2.png");
 
-    this.load.image("flor-laranja", "./assets/mapa2/flor-laranja2.png");
+    this.load.image("flor-laranja2", "./assets/mapa2/flor-laranja2.png");
 
     this.load.image("gameover", "./assets/fim/gameover.png");
 
@@ -75,6 +75,7 @@ export default class fase2 extends Phaser.Scene {
 
     // Trilha sonora
     this.trilha = this.sound.add("fairy-tale");
+    this.trilha.loop = true;
     this.trilha.play();
 
     // Efeito sonoro
@@ -107,7 +108,7 @@ export default class fase2 extends Phaser.Scene {
 
     // Player 1
 
-    // this.porta = this.physics.add.sprite(1280, 130, "porta2", 0); // 
+    // this.porta = this.physics.add.sprite(1280, 130, "porta2", 0); //
     this.porta = this.physics.add.sprite(1280, 430, "porta2", 0);
     this.porta.body.setAllowGravity(false);
     this.porta.body.setImmovable(true);
@@ -264,13 +265,13 @@ export default class fase2 extends Phaser.Scene {
         objeto: undefined,
       }, */
       {
-        x: 1150, /* 1000 */
-        y: 530, /* 130 */
+        x: 1150 /* 1000 */,
+        y: 530 /* 130 */,
         objeto: undefined,
       },
     ];
     this.flores_laranja.forEach((item) => {
-      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja2");
       item.objeto.body.setAllowGravity(false);
       item.objeto.body.setImmovable();
       this.physics.add.overlap(
@@ -320,13 +321,13 @@ export default class fase2 extends Phaser.Scene {
         objeto: undefined,
       },*/
       {
-        x: 1410, /* 1560 */
-        y: 530, /* 130 */
+        x: 1410 /* 1560 */,
+        y: 530 /* 130 */,
         objeto: undefined,
       },
     ];
     this.flores_lilas.forEach((item) => {
-      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas");
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas2");
       item.objeto.body.setAllowGravity(false);
       item.objeto.body.setImmovable();
       this.physics.add.overlap(
@@ -540,13 +541,13 @@ export default class fase2 extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 2496, 640);
     this.cameras.main.startFollow(this.player_1);
 
-    this.game.socket.on("estado-notificar", ({ frame, x, y }) => {
+    this.game.socket.on("estado-notificar-fase2", ({ frame, x, y }) => {
       this.player_2.setFrame(frame);
       this.player_2.x = x + 24;
       this.player_2.y = y + 24;
     });
 
-    this.game.socket.on("artefatos-notificar", (artefatos) => {
+    this.game.socket.on("artefatos-notificar-fase2", (artefatos) => {
       let coletadas = 0;
       if (artefatos.laranja) {
         for (let i = 0; i < artefatos.laranja.length; i++) {
@@ -597,7 +598,7 @@ export default class fase2 extends Phaser.Scene {
       }
     });
 
-    this.game.socket.on("cena-notificar", (cena) => {
+    this.game.socket.on("cena-notificar-fase2", (cena) => {
       this.game.scene.stop("fase2");
       this.game.scene.start(cena);
     });
@@ -605,7 +606,7 @@ export default class fase2 extends Phaser.Scene {
 
   update() {
     try {
-      this.game.socket.emit("estado-publicar", this.game.sala, {
+      this.game.socket.emit("estado-publicar-fase2", this.game.sala, {
         frame: this.player_1.anims.getFrameName(),
         x: this.player_1.body.x,
         y: this.player_1.body.y,
@@ -619,7 +620,7 @@ export default class fase2 extends Phaser.Scene {
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
-      this.game.socket.emit("artefatos-publicar", this.game.sala, {
+      this.game.socket.emit("artefatos-publicar-fase2", this.game.sala, {
         laranja: this.flores_laranja.map((flor) => flor.objeto.visible),
       });
       this.flores_laranja_coletadas += 1;
@@ -644,7 +645,7 @@ export default class fase2 extends Phaser.Scene {
     if (this.game.jogadores.segundo === this.game.socket.id) {
       flor.disableBody(true, true);
       this.efeito_flor.play();
-      this.game.socket.emit("artefatos-publicar", this.game.sala, {
+      this.game.socket.emit("artefatos-publicar-fase2", this.game.sala, {
         lilas: this.flores_lilas.map((flor) => flor.objeto.visible),
       });
       this.flores_lilas_coletadas += 1;
@@ -668,12 +669,12 @@ export default class fase2 extends Phaser.Scene {
   cair_na_lava() {
     this.game.scene.stop("fase2");
     this.game.scene.start("gameover2");
-    this.game.socket.emit("cena-publicar", this.game.sala, "gameover2");
+    this.game.socket.emit("cena-publicar-fase2", this.game.sala, "gameover2");
   }
 
   passar_de_fase() {
+    this.game.socket.emit("cena-publicar-fase2", this.game.sala, "fase3");
     this.game.scene.stop("fase2");
     this.game.scene.start("fase3");
-    this.game.socket.emit("cena-publicar", this.game.sala, "fase3");
   }
 }
