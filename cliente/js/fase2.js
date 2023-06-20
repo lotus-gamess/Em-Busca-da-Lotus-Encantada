@@ -27,9 +27,9 @@ export default class fase2 extends Phaser.Scene {
 
     // Objetos
 
-    this.load.image("flor-lilas2", "./assets/mapa2/flor-lilas2.png");
+    this.load.image("flor-lilas", "./assets/mapa2/flor-lilas2.png");
 
-    this.load.image("flor-laranja2", "./assets/mapa2/flor-laranja2.png");
+    this.load.image("flor-laranja", "./assets/mapa2/flor-laranja2.png");
 
     this.load.image("gameover", "./assets/fim/gameover.png");
 
@@ -46,10 +46,6 @@ export default class fase2 extends Phaser.Scene {
     // Botões
 
     this.load.spritesheet("cima", "./assets/botao/cima.png", {
-      frameWidth: 64,
-      frameWidth: 64,
-    });
-    this.load.spritesheet("baixo", "./assets/botao/baixo.png", {
       frameWidth: 64,
       frameWidth: 64,
     });
@@ -111,7 +107,8 @@ export default class fase2 extends Phaser.Scene {
 
     // Player 1
 
-    this.porta = this.physics.add.sprite(1280, 130, "porta2", 0);
+    // this.porta = this.physics.add.sprite(1280, 130, "porta2", 0); // 
+    this.porta = this.physics.add.sprite(1280, 430, "porta2", 0);
     this.porta.body.setAllowGravity(false);
     this.porta.body.setImmovable(true);
 
@@ -265,15 +262,15 @@ export default class fase2 extends Phaser.Scene {
         x: 135,
         y: 100,
         objeto: undefined,
-      },*/
+      }, */
       {
-        x: 1000,
-        y: 130,
+        x: 1150, /* 1000 */
+        y: 530, /* 130 */
         objeto: undefined,
       },
     ];
     this.flores_laranja.forEach((item) => {
-      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja2");
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
       item.objeto.body.setAllowGravity(false);
       item.objeto.body.setImmovable();
       this.physics.add.overlap(
@@ -323,13 +320,13 @@ export default class fase2 extends Phaser.Scene {
         objeto: undefined,
       },*/
       {
-        x: 1560,
-        y: 130,
+        x: 1410, /* 1560 */
+        y: 530, /* 130 */
         objeto: undefined,
       },
     ];
     this.flores_lilas.forEach((item) => {
-      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas2");
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas");
       item.objeto.body.setAllowGravity(false);
       item.objeto.body.setImmovable();
       this.physics.add.overlap(

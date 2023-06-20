@@ -16,7 +16,6 @@ export default class sala extends Phaser.Scene {
     this.load.image("sala8", "./assets/botao-sala/sala8.png");
     this.load.image("sala9", "./assets/botao-sala/sala9.png");
     this.load.image("sala10", "./assets/botao-sala/sala10.png");
-
   }
 
   create() {
@@ -122,7 +121,8 @@ export default class sala extends Phaser.Scene {
       if (jogadores.segundo) {
         this.mensagem.destroy();
         this.game.jogadores = jogadores;
-        this.game.scene.start("fase2");
+        this.game.scene.stop("sala");
+        this.game.scene.start("fase1");
       } else if (jogadores.primeiro) {
         this.grade.destroy();
         this.imagem.destroy();
@@ -139,5 +139,5 @@ export default class sala extends Phaser.Scene {
     });
   }
 
-  update() { }
+  update() {}
 }

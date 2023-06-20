@@ -27,9 +27,9 @@ export default class fase1 extends Phaser.Scene {
 
     // Objetos
 
-    this.load.image("flor-lilas", "./assets/objeto/flor-lilas.png");
+    this.load.image("flor-lilas", "./assets/mapa1/flor-lilas.png");
 
-    this.load.image("flor-laranja", "./assets/objeto/flor-laranja.png");
+    this.load.image("flor-laranja", "./assets/mapa1/flor-laranja.png");
 
     this.load.image("gameover", "./assets/fim/gameover.png");
 
@@ -46,10 +46,6 @@ export default class fase1 extends Phaser.Scene {
     // Botões
 
     this.load.spritesheet("cima", "./assets/botao/cima.png", {
-      frameWidth: 64,
-      frameWidth: 64,
-    });
-    this.load.spritesheet("baixo", "./assets/botao/baixo.png", {
       frameWidth: 64,
       frameWidth: 64,
     });
@@ -111,7 +107,8 @@ export default class fase1 extends Phaser.Scene {
 
     // Player 1
 
-    this.porta = this.physics.add.sprite(2142, 422, "porta", 0);
+    // this.porta = this.physics.add.sprite(2142, 422, "porta", 0); //
+    this.porta = this.physics.add.sprite(600, 400, "porta", 0);
     this.porta.body.setAllowGravity(false);
     this.porta.body.setImmovable(true);
 
@@ -695,7 +692,6 @@ export default class fase1 extends Phaser.Scene {
 
   passar_de_fase() {
     this.game.scene.stop("fase1");
-    this.game.scene.destroy("fase1");
     this.game.scene.start("fase2");
     this.game.socket.emit("cena-publicar", this.game.sala, "fase2");
   }

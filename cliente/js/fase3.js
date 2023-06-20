@@ -49,10 +49,6 @@ export default class fase3 extends Phaser.Scene {
       frameWidth: 64,
       frameWidth: 64,
     });
-    this.load.spritesheet("baixo", "./assets/botao/baixo.png", {
-      frameWidth: 64,
-      frameWidth: 64,
-    });
     this.load.spritesheet("esquerda", "./assets/botao/esquerda.png", {
       frameWidth: 64,
       frameWidth: 64,
