@@ -27,9 +27,9 @@ export default class fase3 extends Phaser.Scene {
 
     // Objetos
 
-    this.load.image("flor-lilas", "./assets/mapa3/flor-lilas3.png");
+    this.load.image("flor-lilas3", "./assets/mapa3/flor-lilas3.png");
 
-    this.load.image("flor-laranja", "./assets/mapa3/flor-laranja3.png");
+    this.load.image("flor-laranja3", "./assets/mapa3/flor-laranja3.png");
 
     this.load.image("gameover", "./assets/fim/gameover.png");
 
@@ -232,7 +232,7 @@ export default class fase3 extends Phaser.Scene {
         x: 241,
         y: 320,
         objeto: undefined,
-      } /*
+      },
       {
         x: 1250,
         y: 450,
@@ -267,10 +267,10 @@ export default class fase3 extends Phaser.Scene {
         x: 2460,
         y: 550,
         objeto: undefined,
-      },*/,
+      },
     ];
     this.flores_laranja.forEach((item) => {
-      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja3");
       item.objeto.body.setAllowGravity(false);
       item.objeto.body.setImmovable();
       this.physics.add.overlap(
@@ -288,7 +288,7 @@ export default class fase3 extends Phaser.Scene {
         x: 560,
         y: 320,
         objeto: undefined,
-      } /*
+      },
       {
         x: 1025,
         y: 450,
@@ -318,10 +318,10 @@ export default class fase3 extends Phaser.Scene {
         x: 2465,
         y: 420,
         objeto: undefined,
-      },*/,
+      },
     ];
     this.flores_lilas.forEach((item) => {
-      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas");
+      item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas3");
       item.objeto.body.setAllowGravity(false);
       item.objeto.body.setImmovable();
       this.physics.add.overlap(

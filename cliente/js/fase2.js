@@ -108,8 +108,7 @@ export default class fase2 extends Phaser.Scene {
 
     // Player 1
 
-    // this.porta = this.physics.add.sprite(1280, 130, "porta2", 0); //
-    this.porta = this.physics.add.sprite(1280, 430, "porta2", 0);
+    this.porta = this.physics.add.sprite(1280, 130, "porta2", 0);
     this.porta.body.setAllowGravity(false);
     this.porta.body.setImmovable(true);
 
@@ -229,7 +228,7 @@ export default class fase2 extends Phaser.Scene {
 
     // Animação de lista de flores laranja
     this.flores_laranja = [
-      /*{
+      {
         x: 180,
         y: 550,
         objeto: undefined,
@@ -263,10 +262,10 @@ export default class fase2 extends Phaser.Scene {
         x: 135,
         y: 100,
         objeto: undefined,
-      }, */
+      }, 
       {
-        x: 1150 /* 1000 */,
-        y: 530 /* 130 */,
+        x: 1000,
+        y: 130,
         objeto: undefined,
       },
     ];
@@ -285,7 +284,7 @@ export default class fase2 extends Phaser.Scene {
 
     // Animação de lista de flores lilás
     this.flores_lilas = [
-      /*{
+      {
         x: 2380,
         y: 550,
         objeto: undefined,
@@ -319,10 +318,10 @@ export default class fase2 extends Phaser.Scene {
         x: 2420,
         y: 100,
         objeto: undefined,
-      },*/
+      },
       {
-        x: 1410 /* 1560 */,
-        y: 530 /* 130 */,
+        x: 1560,
+        y: 130,
         objeto: undefined,
       },
     ];

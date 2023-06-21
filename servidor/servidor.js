@@ -69,7 +69,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("cena-publicar-fase2", (sala, cena) => {
-    socket.broadcast.to(sala).emit("cena-notificar-fase", cena);
+    socket.broadcast.to(sala).emit("cena-notificar-fase2", cena);
   });
 
   /* Fase 3 */

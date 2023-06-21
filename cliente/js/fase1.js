@@ -108,8 +108,7 @@ export default class fase1 extends Phaser.Scene {
 
     // Player 1
 
-    // this.porta = this.physics.add.sprite(2142, 422, "porta", 0); //
-    this.porta = this.physics.add.sprite(600, 400, "porta", 0);
+    this.porta = this.physics.add.sprite(2142, 422, "porta", 0);
     this.porta.body.setAllowGravity(false);
     this.porta.body.setImmovable(true);
 
@@ -328,7 +327,7 @@ export default class fase1 extends Phaser.Scene {
         y: 340,
         objeto: undefined,
       },
-      /* {
+      {
         x: 90,
         y: 240,
         objeto: undefined,
@@ -362,7 +361,7 @@ export default class fase1 extends Phaser.Scene {
         x: 2460,
         y: 550,
         objeto: undefined,
-      },*/
+      },
     ];
     this.flores_laranja.forEach((item) => {
       item.objeto = this.physics.add.sprite(item.x, item.y, "flor-laranja");
@@ -384,7 +383,7 @@ export default class fase1 extends Phaser.Scene {
         y: 550,
         objeto: undefined,
       },
-      /* {
+      {
         x: 1540,
         y: 550,
         objeto: undefined,
@@ -418,7 +417,7 @@ export default class fase1 extends Phaser.Scene {
         x: 1850,
         y: 400,
         objeto: undefined,
-      },*/
+      },
     ];
     this.flores_lilas.forEach((item) => {
       item.objeto = this.physics.add.sprite(item.x, item.y, "flor-lilas");
